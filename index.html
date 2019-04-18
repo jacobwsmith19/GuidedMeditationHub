@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Guided Meditation Hub</title>
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- jQuery link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- CSS link -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    
+    <div class="jumbotron">
+        <div class="text-center">
+          <strong>Guided Meditation Hub</strong>
+        </div>
+    </div>
+    
+    <div class="text-center" id="audio-player-div">
+        <audio id= "audioPlayer" controls preload="metadata" style=" width:600px;">
+            <source id= "currentlyPlaying" src="assets/audio/alan-watts.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio> 
+    </div>
+    <div id="buttons-div" class="text-center">
+        <button type="button" class="btn btn-warning" id="sam-harris-button" src= "assets/audio/sam-harris.mp3">Sam Harris</button>
+        <button type="button" class="btn btn-warning" id="jhoseph-goldstein-button" src= "assets/audio/joseph-goldstein.mp3">Joseph Goldstein</button>
+        <button type="button" class="btn btn-warning" id="allan-watts-button" src= "assets/audio/alan-watts.mp3">Alan Watts</button>
+    </div>
+
+</div> <!-- Close Container -->
+
+<!-- JavaScript link -->
+<script src="assets/javascript/app.js"></script>
+
+</body>
+</html>
