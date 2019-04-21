@@ -14,7 +14,15 @@ $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response.sheets[0].data[0].rowData[1].values[0].effectiveValue.stringValue);
+    console.log(response);
     sheetsLink = response.sheets[0].data[0].rowData[1].values[0].effectiveValue.stringValue
     $("#google-sheets").attr("src", sheetsLink);
+
+// function to log the urls for each file on the "shorter-than-1000" tab in the spreadsheet
+for (i = 1; i < response.sheets[4].data[0].rowData.length; i++){
+    console.log(response.sheets[4].data[0].rowData[i].values[0].effectiveValue);
+}
+
   });
+
+
