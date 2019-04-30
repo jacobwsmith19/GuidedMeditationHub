@@ -5,4 +5,30 @@
     font-size: 90px;
 }
 
+/* Duration Toggle 
+#chooseDuration {
+    background-color: rgb(213, 250, 3);
+    display: inline-block;
+    width: 360px;
+    padding: 3px;
+    position: relative;
+}
 
+#durationSelector {
+    width: 45%;
+    background-color: white;
+    opacity: .7;
+    position: absolute;
+    z-index: 200;
+}
+
+.left {
+    transform: translateX(120px); 
+    width: 200px;
+}
+.right {
+    transform: translateX(-120px); 
+    width: 200px;
+} */
+  
+/* End Duration Toggle */
