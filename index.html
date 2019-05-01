@@ -23,13 +23,7 @@
         </div>
     </div>
     
-    <div class="text-center" id="audio-player-div">
-         <audio id= "audioPlayer" controls preload="metadata" style=" width:600px;">
-            <source id= "currentlyPlaying" src="" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>  
-    </div>
-    </br>
+ 
     
     <!--<div id="buttons-div" class="text-center">
         <button type="button" class="btn btn-warning" id="sam-harris-button" src= "http://docs.google.com/uc?export=open&id=1tgIxvdX-EMyR4ZiImP2eU-TolWl4fO1r">Sam Harris</button>
@@ -46,7 +40,22 @@
     </div>
     </br>
 
-    <div id="playlist">
+    <div class="text-center" id="audio-player-div">
+        <audio id= "audioPlayer" controls preload="metadata" style=" width:600px;">
+           <source id= "currentlyPlaying" src="" type="audio/mpeg">
+           Your browser does not support the audio element.
+       </audio>  
+   </div>
+   </br>
+
+    <div class="row justify-content-center">
+        <div class="col-4" id="playlist">
+        </div>
+        <div class="col-4" id="description-div">
+            <strong>Playing: </strong><span id="current-meditation"></span>
+            </br>
+            <strong>Description: </strong><span id="description"></span>
+        </div>
     </div>
 
 </div> <!-- Close Container -->
