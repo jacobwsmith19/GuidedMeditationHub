@@ -1,27 +1,4 @@
-// Replaces the audio player's src with the src from the button
-$(".btn").on("click", function(x) {
-    x.preventDefault();
-    $("#currentlyPlaying").attr("src", $(this).attr("src"));
-    console.log(this);
-    $("#audioPlayer")[0].load();
-});
 
-// //duration marker
-// var duration = 15;
-// // choose duration toggle
-// $('#chooseDuration').on('click', function() {
-//   var durationToggle = $(this).find('#durationSelector');
-//   if(durationToggle.hasClass('left')){
-//       // remove class left + add class right
-//       durationToggle.removeClass('left');
-//       durationToggle.addClass('right');
-//       duration = 15;
-//   } else{
-//     durationToggle.removeClass('right');
-//     durationToggle.addClass('left');
-//     duration = 16;
-//   }
-// });
 
 var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";                                                             
 var sheetsA2;
@@ -62,9 +39,23 @@ $.ajax({
     // function to log the urls for each file on the "shorter-than-1000" tab in the spreadsheet
     for (i = 1; i < response.sheets[4].data[0].rowData.length; i++){
         console.log(response.sheets[4].data[0].rowData[i].values[0].effectiveValue.stringValue);
+        $("#playlist").append(`
+            <div class='current-playlist' src='${response.sheets[4].data[0].rowData[i].values[0].effectiveValue.stringValue}'>
+            ${response.sheets[4].data[0].rowData[i].values[6].effectiveValue.stringValue}
+            </div>
+            `);
     }
     console.log("-------------------------------------------------------");
 
-  });
+    $(".current-playlist").on("click", function(x) {
+        x.preventDefault();
+        $("#currentlyPlaying").attr("src", $(this).attr("src"));
+        console.log(this);
+        $("#audioPlayer")[0].load();
+    });
+
+  }); //close AJAX function
+
+
 
 
