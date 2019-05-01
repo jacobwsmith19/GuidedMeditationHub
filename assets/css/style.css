@@ -5,6 +5,11 @@
     font-size: 90px;
 }
 
+.btn {
+    width: 150px;
+    height: 70px;
+}
+
 /* Duration Toggle 
 #chooseDuration {
     background-color: rgb(213, 250, 3);
