@@ -22,7 +22,7 @@ $.ajax({
                 <div class= 'current-playlist' 
                 src= '${response.sheets[4].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
                 description= '${response.sheets[4].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[4].data[0].rowData[i].values[6].effectiveValue.stringValue}'>
+                title= '${response.sheets[4].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
                 ${response.sheets[4].data[0].rowData[i].values[6].effectiveValue.stringValue}
                 </div>
                 `);
@@ -57,7 +57,7 @@ $.ajax({
                 <div class= 'current-playlist' 
                 src= '${response.sheets[5].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
                 description= '${response.sheets[5].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[5].data[0].rowData[i].values[6].effectiveValue.stringValue}'>
+                title= '${response.sheets[5].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
                 ${response.sheets[5].data[0].rowData[i].values[6].effectiveValue.stringValue}
                 </div>
                 `);
@@ -92,7 +92,7 @@ $.ajax({
                 <div class= 'current-playlist' 
                 src= '${response.sheets[1].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
                 description= '${response.sheets[1].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[1].data[0].rowData[i].values[6].effectiveValue.stringValue}'>
+                title= '${response.sheets[1].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
                 ${response.sheets[1].data[0].rowData[i].values[6].effectiveValue.stringValue}
                 </div>
                 `);
@@ -127,7 +127,7 @@ $.ajax({
                 <div class= 'current-playlist' 
                 src= '${response.sheets[3].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
                 description= '${response.sheets[3].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[3].data[0].rowData[i].values[6].effectiveValue.stringValue}'>
+                title= '${response.sheets[3].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
                 ${response.sheets[3].data[0].rowData[i].values[6].effectiveValue.stringValue}
                 </div>
                 `);
