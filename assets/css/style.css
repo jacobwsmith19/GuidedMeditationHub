@@ -6,7 +6,7 @@ body {
     background-color: rgba(243, 94, 26, 0.747); 
     color: rgb(213, 250, 3);
     font-family: 'Sue Ellen Francisco', cursive;
-    font-size: 90px;
+    font-size: 100px;
 }
 
 .btn {
@@ -14,6 +14,8 @@ body {
     height: 70px;
     font-family: 'Hind Madurai', sans-serif;
     font-size: 20px;
+    border: 1px solid;
+    border-color:  rgba(243, 94, 26, 0.747); 
 
 }
 

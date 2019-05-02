@@ -1,9 +1,35 @@
+//Spread sheet key
+var shortSheet = 4;
+var longSheet = 5;
+var walkingSheet = 1;
+var eyesOpenSheet = 3;
 
+// Hides description box until button is clicked
+$('#description-div').hide();
+$(".btn").on("click", function(){
+    $('#description-div').show();
+});
 
-var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";                                                             
-var sheetsA2;
+// Function that loads new audio file into the audio player and updates description box
+function playAudio(){
+    $(".current-playlist").on("click", function(x) {
+        x.preventDefault();
+        $("#currentlyPlaying").attr("src", $(this).attr("src"));
+        $("#audioPlayer")[0].load();
 
-// Pulls the value from cell A2 in the Google Sheets spreadsheet
+        // Clears description box, then populates with data from description column in spread sheet
+        $("#description").html("");
+        $("#description").append($(this).attr("description"));
+
+        // Clears currently playing box, then populates with data from title column in spread sheet
+        $("#current-meditation").html("");
+        $("#current-meditation").append($(this).attr("title"));
+
+    });
+}
+
+// Pulls data from Google spread sheet
+var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";
 $.ajax({
     url: queryURL,
     method: "GET"
@@ -27,22 +53,7 @@ $.ajax({
                 </div>
                 `);
         }
-
-        // On click function for playlist items - updates src of audio file being played
-        $(".current-playlist").on("click", function(x) {
-            x.preventDefault();
-            $("#currentlyPlaying").attr("src", $(this).attr("src"));
-            $("#audioPlayer")[0].load();
-
-            // Clears description box, then populates with data from description column in spread sheet
-            $("#description").html("");
-            $("#description").append($(this).attr("description"));
-
-            // Clears currently playing box, then populates with data from title column in spread sheet
-            $("#current-meditation").html("");
-            $("#current-meditation").append($(this).attr("title"));
-
-        });
+        playAudio();
     }); 
 
     // Long ---------------------------------------------------------------------------------------------------------
@@ -62,22 +73,7 @@ $.ajax({
                 </div>
                 `);
         }
-
-        // On click function for playlist items - updates src of audio file being played
-        $(".current-playlist").on("click", function(x) {
-            x.preventDefault();
-            $("#currentlyPlaying").attr("src", $(this).attr("src"));
-            $("#audioPlayer")[0].load();
-
-            // Clears description box, then populates with data from description column in spread sheet
-            $("#description").html("");
-            $("#description").append($(this).attr("description"));
-
-            // Clears currently playing box, then populates with data from title column in spread sheet
-            $("#current-meditation").html("");
-            $("#current-meditation").append($(this).attr("title"));
-
-        });
+        playAudio();
     }); 
 
     // Walking ---------------------------------------------------------------------------------------------------------
@@ -97,22 +93,7 @@ $.ajax({
                 </div>
                 `);
         }
-
-        // On click function for playlist items - updates src of audio file being played
-        $(".current-playlist").on("click", function(x) {
-            x.preventDefault();
-            $("#currentlyPlaying").attr("src", $(this).attr("src"));
-            $("#audioPlayer")[0].load();
-
-            // Clears description box, then populates with data from description column in spread sheet
-            $("#description").html("");
-            $("#description").append($(this).attr("description"));
-
-            // Clears currently playing box, then populates with data from title column in spread sheet
-            $("#current-meditation").html("");
-            $("#current-meditation").append($(this).attr("title"));
-
-        });
+        playAudio();
     }); 
 
     // Eyes open ---------------------------------------------------------------------------------------------------------
@@ -132,22 +113,7 @@ $.ajax({
                 </div>
                 `);
         }
-
-        // On click function for playlist items - updates src of audio file being played
-        $(".current-playlist").on("click", function(x) {
-            x.preventDefault();
-            $("#currentlyPlaying").attr("src", $(this).attr("src"));
-            $("#audioPlayer")[0].load();
-
-            // Clears description box, then populates with data from description column in spread sheet
-            $("#description").html("");
-            $("#description").append($(this).attr("description"));
-
-            // Clears currently playing box, then populates with data from title column in spread sheet
-            $("#current-meditation").html("");
-            $("#current-meditation").append($(this).attr("title"));
-
-        });
+        playAudio();
     }); 
     
 
