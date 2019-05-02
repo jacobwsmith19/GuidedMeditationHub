@@ -1,4 +1,4 @@
-//Spread sheet key
+// Spread sheet key
 var shortSheet = 4;
 var longSheet = 5;
 var walkingSheet = 1;
@@ -10,7 +10,7 @@ $(".btn").on("click", function(){
     $('#description-div').show();
 });
 
-// Function that loads new audio file into the audio player and updates description box
+// Loads new audio file into the audio player and updates description box
 function playAudio(){
     $(".current-playlist").on("click", function(x) {
         x.preventDefault();
@@ -35,90 +35,47 @@ $.ajax({
     method: "GET"
   }).then(function(response) {
     console.log(response);
+    
+    // Populates playlist div based on button clicked
+    function createPlaylist(){
+        
+        $("#playlist").html("");
 
-    // Short ---------------------------------------------------------------------------------------------------------
+        for (i = 1; i < response.sheets[sheetNum].data[0].rowData.length; i++){
+            $("#playlist").append(`
+                <div class= 'current-playlist' 
+                src= '${response.sheets[sheetNum].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
+                description= '${response.sheets[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue}'
+                title= '${response.sheets[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
+                ${response.sheets[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue}
+                </div>
+            `);
+        }
+        playAudio();
+    }
+
+    // Short
     $("#short-button").on("click", function(){
+        sheetNum = shortSheet;
+        createPlaylist();
+    });
 
-        // Clears playlist div
-        $("#playlist").html("");
-
-        // Populates playlist div based on button clicked
-        for (i = 1; i < response.sheets[4].data[0].rowData.length; i++){
-            $("#playlist").append(`
-                <div class= 'current-playlist' 
-                src= '${response.sheets[4].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
-                description= '${response.sheets[4].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[4].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
-                ${response.sheets[4].data[0].rowData[i].values[6].effectiveValue.stringValue}
-                </div>
-                `);
-        }
-        playAudio();
-    }); 
-
-    // Long ---------------------------------------------------------------------------------------------------------
+    // Long
     $("#long-button").on("click", function(){
-
-        // Clears playlist div
-        $("#playlist").html("");
-
-        // Populates playlist div based on button clicked
-        for (i = 1; i < response.sheets[5].data[0].rowData.length; i++){
-            $("#playlist").append(`
-                <div class= 'current-playlist' 
-                src= '${response.sheets[5].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
-                description= '${response.sheets[5].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[5].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
-                ${response.sheets[5].data[0].rowData[i].values[6].effectiveValue.stringValue}
-                </div>
-                `);
-        }
-        playAudio();
+        sheetNum = longSheet;
+        createPlaylist();
     }); 
 
-    // Walking ---------------------------------------------------------------------------------------------------------
+    // Walking
     $("#walking-button").on("click", function(){
-
-        // Clears playlist div
-        $("#playlist").html("");
-
-        // Populates playlist div based on button clicked
-        for (i = 1; i < response.sheets[1].data[0].rowData.length; i++){
-            $("#playlist").append(`
-                <div class= 'current-playlist' 
-                src= '${response.sheets[1].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
-                description= '${response.sheets[1].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[1].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
-                ${response.sheets[1].data[0].rowData[i].values[6].effectiveValue.stringValue}
-                </div>
-                `);
-        }
-        playAudio();
+        sheetNum = walkingSheet;
+        createPlaylist();
     }); 
 
-    // Eyes open ---------------------------------------------------------------------------------------------------------
+    // Eyes open
     $("#eyes-open-button").on("click", function(){
-
-        // Clears playlist div
-        $("#playlist").html("");
-
-        // Populates playlist div based on button clicked
-        for (i = 1; i < response.sheets[3].data[0].rowData.length; i++){
-            $("#playlist").append(`
-                <div class= 'current-playlist' 
-                src= '${response.sheets[3].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
-                description= '${response.sheets[3].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-                title= '${response.sheets[3].data[0].rowData[i].values[6].effectiveValue.stringValue}'>&nbsp; 
-                ${response.sheets[3].data[0].rowData[i].values[6].effectiveValue.stringValue}
-                </div>
-                `);
-        }
-        playAudio();
+        sheetNum = eyesOpenSheet;
+        createPlaylist();
     }); 
     
-
-  }); //close AJAX function
-
-
-
-
+}); //close AJAX function
