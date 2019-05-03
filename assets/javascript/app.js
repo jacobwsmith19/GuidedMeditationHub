@@ -6,9 +6,6 @@ var eyesOpenSheet = 3;
 
 // Hides description box until button is clicked
 $('#description-div').hide();
-$(".btn").on("click", function(){
-    $('#description-div').show();
-});
 
 // Loads new audio file into the audio player and updates description box
 function playAudio(){
@@ -39,6 +36,7 @@ $.ajax({
     // Populates playlist div based on button clicked
     function createPlaylist(){
         
+        $('#description-div').show();
         $("#playlist").html("");
 
         for (i = 1; i < response.sheets[sheetNum].data[0].rowData.length; i++){
