@@ -1,11 +1,14 @@
-// Spread sheet key
+// Spread sheet tab key
 var shortSheet = 4;
 var longSheet = 5;
 var walkingSheet = 1;
 var eyesOpenSheet = 3;
+
+// Global variables
 var playlist = [];
 var playingIndex = 0;
 var content;
+
 // Hides description box until button is clicked
 $('#description-div').hide();
 
@@ -28,7 +31,7 @@ function playAudio(){
     });
 }
 
-// Pulls data from Google spread sheet
+// Ajax call to pull data from Google spreadsheet
 var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";
 $.ajax({
     url: queryURL,
@@ -36,27 +39,27 @@ $.ajax({
   }).then(function(response) {
     console.log(response);
     content = response.sheets;
-}); //close AJAX function
+}); 
 
-// Short
+// Short button
 $("#short-button").on("click", function(){
     sheetNum = shortSheet;
     createPlaylist(shortSheet);
 });
 
-// Long
+// Long button
 $("#long-button").on("click", function(){
     sheetNum = longSheet;
     createPlaylist(longSheet);
 }); 
 
-// Walking
+// Walking button
 $("#walking-button").on("click", function(){
     sheetNum = walkingSheet;
     createPlaylist(walkingSheet);
 }); 
 
-// Eyes open
+// Eyes open button
 $("#eyes-open-button").on("click", function(){
     sheetNum = eyesOpenSheet;
     createPlaylist(eyesOpenSheet);
@@ -98,6 +101,23 @@ $("#previous-button").on("click", function(){
     // Clears currently playing box, then populates with data from title column in spread sheet
     $("#current-meditation").html("");
     $("#current-meditation").append(playPrev.title);
+})
+
+$("#shuffle-button").on("click", function(){
+    var currentIndex = playlist.length;
+    var temporaryValue;
+    var randomIndex;
+
+    while (0 !== currentIndex){
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -=1;
+
+        temporaryValue = playlist[currentIndex];
+        playlist[currentIndex] = playlist[randomIndex];
+        playlist[randomIndex] = temporaryValue;
+    }
+
+    return playlist;
 })
 
 // Populates playlist div based on button clicked
