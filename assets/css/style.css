@@ -16,7 +16,24 @@ body {
     font-size: 20px;
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
+}
 
+#next-button, #previous-button, #shuffle-button {
+    height: 50px;
+    width: 120px;
+    margin-top: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgba(243, 94, 26, 0.747); 
+    border-radius: 30px;
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 20px;
+    border: 1px solid;
+    border-color:  rgba(243, 94, 26, 0.747); 
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+#next-button:hover, #previous-button:hover, #shuffle-button:hover {
+    background-color: #ffc107;
 }
 
 .current-playlist {
