@@ -107,7 +107,7 @@ $("#shuffle-button").on("click", function(){
     var currentIndex = playlist.length;
     var temporaryValue;
     var randomIndex;
-
+console.log(currentIndex);
     while (0 !== currentIndex){
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -=1;
@@ -116,11 +116,13 @@ $("#shuffle-button").on("click", function(){
         playlist[currentIndex] = playlist[randomIndex];
         playlist[randomIndex] = temporaryValue;
     }
+    renderPlaylist(playlist);
+    console.log(currentIndex);
 
-    return playlist;
+    // return playlist;
 })
 
-// Populates playlist div based on button clicked
+// Populates playlist array based on button clicked
 function createPlaylist(sheetNum){
     $('#description-div').show();
     $("#playlist").html("");
@@ -132,16 +134,25 @@ function createPlaylist(sheetNum){
             desc: content[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue,
             title: content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue,
         })
+    }
+    renderPlaylist(playlist);
+}
+
+// populate playlist div based on playlist array
+function renderPlaylist(playlist){
+    
+    $("#playlist").html("");
+    playlist.forEach((item, i) => {
         $("#playlist").append(`
             <div class= 'current-playlist' 
-            src= '${content[sheetNum].data[0].rowData[i].values[0].effectiveValue.stringValue}' 
-            description= '${content[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue}'
-            title= '${content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue}'
+            src= '${item.src}' 
+            description= '${item.desc}'
+            title= '${item.title}'
             data-index='${i-1}'>&nbsp; 
-            ${content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue}
+            ${item.title}
             </div>
         `);
-    }
-    
+    });
+
     playAudio();
 }
