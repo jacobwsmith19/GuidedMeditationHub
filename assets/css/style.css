@@ -36,6 +36,25 @@ body {
     background-color: #ffc107;
 }
 
+#next-disabled, #previous-disabled, #shuffle-disabled {
+    height: 50px;
+    width: 120px;
+    margin-top: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgba(219, 215, 213, 0.589); 
+    border-radius: 30px;
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 20px;
+    border: 1px solid;
+    border-color:  rgba(14, 13, 13, 0.747); 
+    color: grey; 
+}
+
+#next-disabled:hover, #previous-disabled:hover, #shuffle-disabled:hover {
+    cursor: default;
+}
+
 .current-playlist {
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 

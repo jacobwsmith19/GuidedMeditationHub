@@ -16,6 +16,12 @@ $('#description-div').hide();
 function playAudio(){
     $(".current-playlist").on("click", function(x) {
         x.preventDefault();
+        
+        // Activates the next/previous/shuffle buttons
+        document.getElementById('next-disabled').id = 'next-button';
+        document.getElementById('previous-disabled').id = 'previous-button';
+        document.getElementById('shuffle-disabled').id = 'shuffle-button';
+        
         $("#currentlyPlaying").attr("src", $(this).attr("src"));
         $("#audioPlayer")[0].load();
 
