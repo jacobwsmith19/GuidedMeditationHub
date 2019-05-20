@@ -36,8 +36,8 @@ body {
     background-color: #ffc107;
 }
 
-#next-button:disabled{
-    background-color: grey;
+#next-button:disabled, #previous-button:disabled, #shuffle-button:disabled{
+    background-color: rgba(128, 128, 128, 0.342);
 }
 
 .current-playlist {
@@ -57,10 +57,13 @@ body {
 
 .playing {
     background-color:  rgba(243, 94, 26, 0.747); 
+    border-radius: 15px;
+    font-weight: bold;
 }
 
 .current-playlist:hover {
     background-color: rgba(243, 94, 26, 0.747); 
+    border-radius: 15px;
 }
 
 #description-div {

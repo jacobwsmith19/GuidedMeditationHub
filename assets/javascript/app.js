@@ -11,9 +11,6 @@ var content;
 
 // Hides description box & disables next/prev/shuff buttons until track is clicked
 $('#description-div').hide();
-$('#next-button').attr("disabled", true);
-$('#previous-button').attr("disabled", true);
-$('#shuffle-button').attr("disabled", true);
 
 // Ajax call to pull data from Google spreadsheet
 var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";
@@ -23,7 +20,11 @@ $.ajax({
   }).then(function(response) {
     console.log(response);
     content = response.sheets;
-    // renable filter buttons
+    // Filter buttons enabled after AJAX call to prevent error
+    $('#short-button').attr("disabled", false);
+    $('#long-button').attr("disabled", false);
+    $('#walking-button').attr("disabled", false);
+    $('#eyes-open-button').attr("disabled", false);
 }); 
 
 // Short button
