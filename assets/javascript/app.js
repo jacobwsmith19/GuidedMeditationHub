@@ -9,33 +9,11 @@ var playlist = [];
 var playingIndex = 0;
 var content;
 
-// Hides description box until button is clicked
+// Hides description box & disables next/prev/shuff buttons until track is clicked
 $('#description-div').hide();
-
-// Loads new audio file into the audio player and updates description box
-function playAudio(){
-    $(".current-playlist").on("click", function(x) {
-        x.preventDefault();
-        
-        // Activates the next/previous/shuffle buttons
-        document.getElementById('next-disabled').id = 'next-button';
-        document.getElementById('previous-disabled').id = 'previous-button';
-        document.getElementById('shuffle-disabled').id = 'shuffle-button';
-        
-        $("#currentlyPlaying").attr("src", $(this).attr("src"));
-        $("#audioPlayer")[0].load();
-
-        // Clears description box, then populates with data from description column in spread sheet
-        $("#description").html("");
-        $("#description").append($(this).attr("description"));
-
-        // Clears currently playing box, then populates with data from title column in spread sheet
-        $("#current-meditation").html("");
-        $("#current-meditation").append($(this).attr("title"));
-
-        playingIndex = $(this).attr('data-index');
-    });
-}
+$('#next-button').attr("disabled", true);
+$('#previous-button').attr("disabled", true);
+$('#shuffle-button').attr("disabled", true);
 
 // Ajax call to pull data from Google spreadsheet
 var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";
@@ -71,6 +49,7 @@ $("#eyes-open-button").on("click", function(){
     createPlaylist(eyesOpenSheet);
 }); 
 
+// Next button
 $("#next-button").on("click", function(){
     playingIndex++;
     if (playingIndex >= playlist.length){
@@ -90,6 +69,7 @@ $("#next-button").on("click", function(){
     $("#current-meditation").append(playNext.title);
 })
 
+// Previous button
 $("#previous-button").on("click", function(){
     playingIndex--;
     if (playingIndex < 0){
@@ -109,6 +89,7 @@ $("#previous-button").on("click", function(){
     $("#current-meditation").append(playPrev.title);
 })
 
+// Shuffle button
 $("#shuffle-button").on("click", function(){
     var currentIndex = playlist.length;
     var temporaryValue;
@@ -124,8 +105,6 @@ console.log(currentIndex);
     }
     renderPlaylist(playlist);
     console.log(currentIndex);
-
-    // return playlist;
 })
 
 // Populates playlist array based on button clicked
@@ -144,9 +123,8 @@ function createPlaylist(sheetNum){
     renderPlaylist(playlist);
 }
 
-// populate playlist div based on playlist array
+// Populates playlist div based on playlist array
 function renderPlaylist(playlist){
-    
     $("#playlist").html("");
     playlist.forEach((item, i) => {
         $("#playlist").append(`
@@ -161,4 +139,32 @@ function renderPlaylist(playlist){
     });
 
     playAudio();
+}
+
+// Loads new audio file into the audio player and updates description box
+function playAudio(){
+    $(".current-playlist").on("click", function(x) {
+        x.preventDefault();
+
+        // Enables next/prev/shuffle buttons
+        $('#next-button').attr("disabled", false);
+        $('#previous-button').attr("disabled", false);
+        $('#shuffle-button').attr("disabled", false);
+        
+        // Loads audio file into audio player
+        $("#currentlyPlaying").attr("src", $(this).attr("src"));
+        $("#audioPlayer")[0].load();
+
+        // Clears description box, then populates with data from description column in spread sheet
+        $("#description").html("");
+        $("#description").append($(this).attr("description"));
+
+        // Clears currently playing box, then populates with data from title column in spread sheet
+        $("#current-meditation").html("");
+        $("#current-meditation").append($(this).attr("title"));
+
+        playingIndex = $(this).attr('data-index');
+        console.log("playingIndex: " + playingIndex);
+
+    });
 }
