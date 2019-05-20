@@ -36,6 +36,10 @@ body {
     background-color: #ffc107;
 }
 
+#next-button:disabled{
+    background-color: grey;
+}
+
 .current-playlist {
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
@@ -49,6 +53,10 @@ body {
     font-family: 'Hind Madurai', sans-serif;
     font-size: 20px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.playing {
+    background-color:  rgba(243, 94, 26, 0.747); 
 }
 
 .current-playlist:hover {

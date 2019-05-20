@@ -23,6 +23,7 @@ $.ajax({
   }).then(function(response) {
     console.log(response);
     content = response.sheets;
+    // renable filter buttons
 }); 
 
 // Short button
@@ -67,6 +68,9 @@ $("#next-button").on("click", function(){
     // Clears currently playing box, then populates with data from title column in spread sheet
     $("#current-meditation").html("");
     $("#current-meditation").append(playNext.title);
+
+    $('.playing').attr('class', "current-playlist");
+    $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
 })
 
 // Previous button
@@ -87,6 +91,10 @@ $("#previous-button").on("click", function(){
     // Clears currently playing box, then populates with data from title column in spread sheet
     $("#current-meditation").html("");
     $("#current-meditation").append(playPrev.title);
+
+    $('.playing').attr('class', "current-playlist");
+    $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
+
 })
 
 // Shuffle button
@@ -94,7 +102,8 @@ $("#shuffle-button").on("click", function(){
     var currentIndex = playlist.length;
     var temporaryValue;
     var randomIndex;
-console.log(currentIndex);
+    var playingIndex = $('.playing').attr('data-index');
+    var track = playlist[playingIndex];
     while (0 !== currentIndex){
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -=1;
@@ -104,7 +113,7 @@ console.log(currentIndex);
         playlist[randomIndex] = temporaryValue;
     }
     renderPlaylist(playlist);
-    console.log(currentIndex);
+    $(`.current-playlist[data-index="${playlist.indexOf(track)}"]`).attr('class', 'current-playlist playing');
 })
 
 // Populates playlist array based on button clicked
@@ -132,7 +141,7 @@ function renderPlaylist(playlist){
             src= '${item.src}' 
             description= '${item.desc}'
             title= '${item.title}'
-            data-index='${i-1}'>&nbsp; 
+            data-index='${i}'>&nbsp; 
             ${item.title}
             </div>
         `);
@@ -145,6 +154,9 @@ function renderPlaylist(playlist){
 function playAudio(){
     $(".current-playlist").on("click", function(x) {
         x.preventDefault();
+
+        $('.playing').attr('class', "current-playlist");
+        $(this).attr('class', 'current-playlist playing');
 
         // Enables next/prev/shuffle buttons
         $('#next-button').attr("disabled", false);
