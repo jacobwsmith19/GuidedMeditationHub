@@ -103,7 +103,7 @@ $("#shuffle-button").on("click", function(){
     var currentIndex = playlist.length;
     var temporaryValue;
     var randomIndex;
-    var playingIndex = $('.playing').attr('data-index');
+    playingIndex = $('.playing').attr('data-index');
     var track = playlist[playingIndex];
     while (0 !== currentIndex){
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -114,6 +114,7 @@ $("#shuffle-button").on("click", function(){
         playlist[randomIndex] = temporaryValue;
     }
     renderPlaylist(playlist);
+    playingIndex = playlist.indexOf(track);
     $(`.current-playlist[data-index="${playlist.indexOf(track)}"]`).attr('class', 'current-playlist playing');
 })
 
