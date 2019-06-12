@@ -129,6 +129,7 @@ function createPlaylist(sheetNum){
             src: content[sheetNum].data[0].rowData[i].values[0].effectiveValue.stringValue,
             desc: content[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue,
             title: content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue,
+            duration: content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue,
         })
     }
     renderPlaylist(playlist);
@@ -138,13 +139,15 @@ function createPlaylist(sheetNum){
 function renderPlaylist(playlist){
     $("#playlist").html("");
     playlist.forEach((item, i) => {
+        const formattedDuration = moment.utc(item.duration*1000).format('m:ss');
         $("#playlist").append(`
             <div class= 'current-playlist' 
             src= '${item.src}' 
             description= '${item.desc}'
             title= '${item.title}'
+            duration = '${item.duration}'
             data-index='${i}'>&nbsp; 
-            ${item.title}
+            ${item.title}&nbsp;(${formattedDuration})
             </div>
         `);
     });
