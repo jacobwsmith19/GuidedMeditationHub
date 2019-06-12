@@ -8,6 +8,13 @@ var eyesOpenSheet = 3;
 var playlist = [];
 var playingIndex = 0;
 var content;
+var tagsArr = [];
+
+// Icons for tags
+var eyesOpenIcon = `<i class="far fa-eye"></i>`;
+var walkingIcon = `<i class="fas fa-walking"></i>`;
+var longIcon = `<i class="fas fa-hourglass-half"></i>`;
+var shortIcon = `<i class="fas fa-stopwatch"></i>`;
 
 // Hides description box & disables next/prev/shuff buttons until track is clicked
 $('#description-div').hide();
@@ -70,6 +77,10 @@ $("#next-button").on("click", function(){
     $("#current-meditation").html("");
     $("#current-meditation").append(playNext.title);
 
+    // Clears tags, then populates with data from title column in spread sheet
+    $("#tags").html("");
+    $("#tags").append(playNext.tags);
+
     $('.playing').attr('class', "current-playlist");
     $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
 })
@@ -92,6 +103,10 @@ $("#previous-button").on("click", function(){
     // Clears currently playing box, then populates with data from title column in spread sheet
     $("#current-meditation").html("");
     $("#current-meditation").append(playPrev.title);
+
+    // Clears tags box, then populates with data from title column in spread sheet
+    $("#tags").html("");
+    $("#tags").append(playPrev.tags);
 
     $('.playing').attr('class', "current-playlist");
     $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
@@ -123,14 +138,27 @@ function createPlaylist(sheetNum){
     $('#description-div').show();
     $("#playlist").html("");
     playlist = [];
-
+    
     for (i = 1; i < content[sheetNum].data[0].rowData.length; i++){
+        tagsArr = [];
         playlist.push({
             src: content[sheetNum].data[0].rowData[i].values[0].effectiveValue.stringValue,
             desc: content[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue,
             title: content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue,
             duration: content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue,
+            tags: tagsArr,
         })
+        if (content[sheetNum].data[0].rowData[i].values[5].effectiveValue.stringValue === "yes"){
+            tagsArr.push(eyesOpenIcon); 
+        }
+        if (content[sheetNum].data[0].rowData[i].values[4].effectiveValue.stringValue === "no"){
+            tagsArr.push(walkingIcon); 
+        }
+        if (content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue >= 900){
+            tagsArr.push(longIcon); 
+        }else{
+            tagsArr.push(shortIcon);
+        }
     }
     renderPlaylist(playlist);
 }
@@ -146,6 +174,7 @@ function renderPlaylist(playlist){
             description= '${item.desc}'
             title= '${item.title}'
             duration = '${item.duration}'
+            tags= '${item.tags}'
             data-index='${i}'>&nbsp; 
             ${item.title}&nbsp;(${formattedDuration})
             </div>
@@ -180,8 +209,14 @@ function playAudio(){
         $("#current-meditation").html("");
         $("#current-meditation").append($(this).attr("title"));
 
+        // Clears tags box, then populates with data from title column in spread sheet
+        $("#tags").html("");
+        $("#tags").append($(this).attr("tags"));
+
         playingIndex = $(this).attr('data-index');
         console.log("playingIndex: " + playingIndex);
 
     });
 }
+
+
