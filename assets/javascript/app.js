@@ -16,6 +16,9 @@ var walkingIcon = `<i class="fas fa-walking"></i>`;
 var longIcon = `<i class="fas fa-hourglass-half"></i>`;
 var shortIcon = `<i class="fas fa-stopwatch"></i>`;
 
+// Hold active filter options
+let filters = [];
+
 // Hides description box & disables next/prev/shuff buttons until track is clicked
 $('#description-div').hide();
 
@@ -36,26 +39,54 @@ $.ajax({
 
 // Short button
 $("#short-button").on("click", function(){
-    sheetNum = shortSheet;
-    createPlaylist(shortSheet);
+    if ($(this).hasClass('active')){
+        $(this).removeClass('active');
+        filters = filters.filter(x => x != 4);
+    } else {
+        $(this).addClass('active');
+        filters.push(4);
+    }
+
+    createPlaylist();
 });
 
 // Long button
 $("#long-button").on("click", function(){
-    sheetNum = longSheet;
-    createPlaylist(longSheet);
+    if ($(this).hasClass('active')){
+        $(this).removeClass('active');
+        filters = filters.filter(x => x != 5);
+    } else {
+        $(this).addClass('active');
+        filters.push(5);
+    }
+
+    createPlaylist();
 }); 
 
 // Walking button
 $("#walking-button").on("click", function(){
-    sheetNum = walkingSheet;
-    createPlaylist(walkingSheet);
+    if ($(this).hasClass('active')){
+        $(this).removeClass('active');
+        filters = filters.filter(x => x != 1);
+    } else {
+        $(this).addClass('active');
+        filters.push(1);
+    }
+
+    createPlaylist();
 }); 
 
 // Eyes open button
 $("#eyes-open-button").on("click", function(){
-    sheetNum = eyesOpenSheet;
-    createPlaylist(eyesOpenSheet);
+    if ($(this).hasClass('active')){
+        $(this).removeClass('active');
+        filters = filters.filter(x => x != 3);
+    } else {
+        $(this).addClass('active');
+        filters.push(3);
+    }
+
+    createPlaylist();
 }); 
 
 // Next button
@@ -134,34 +165,56 @@ $("#shuffle-button").on("click", function(){
 })
 
 // Populates playlist array based on button clicked
-function createPlaylist(sheetNum){
+function createPlaylist(){
     $('#description-div').show();
     $("#playlist").html("");
-    playlist = [];
+    console.log(filters)
+    var playlist = [];
+    const baseFilterIndex = filters[0] || -1;
+    const additionalFilters = filters.slice(1);
     
-    for (i = 1; i < content[sheetNum].data[0].rowData.length; i++){
-        tagsArr = [];
-        playlist.push({
-            src: content[sheetNum].data[0].rowData[i].values[0].effectiveValue.stringValue,
-            desc: content[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue,
-            title: content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue,
-            duration: content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue,
-            tags: tagsArr,
+    // Gather filtered tracks
+    for (var i = 0; i < baseFilterIndex; i++){
+        var track = content[baseFilterIndex].data[i].rowData[i].values;
+        console.log(1212121212121, track)
+        var found = false
+        additionalFilters.forEach(filterIndex => {
+            found = content[filterIndex].data.indexOf(track) >= 0 
         })
-
-        // These if statements cycle through the selected tab and push relevant icons into the tagsArr
-        if (content[sheetNum].data[0].rowData[i].values[5].effectiveValue.stringValue === "yes"){
-            tagsArr.push(eyesOpenIcon); 
-        }
-        if (content[sheetNum].data[0].rowData[i].values[4].effectiveValue.stringValue === "no"){
-            tagsArr.push(walkingIcon); 
-        }
-        if (content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue >= 900){
-            tagsArr.push(longIcon); 
-        }else{
-            tagsArr.push(shortIcon);
+        if (found){
+            playlist.push({
+                src: track.effectiveValue.stringValue,
+                desc: track.effectiveValue.stringValue,
+                title: track.effectiveValue.stringValue,
+                duration: track.effectiveValue.numberValue,
+                tags: tagsArr,
+            })
         }
     }
+    
+    // for (i = 1; i < content[sheetNum].data[0].rowData.length; i++){
+    //     tagsArr = [];
+    //     playlist.push({
+    //         src: content[sheetNum].data[0].rowData[i].values[0].effectiveValue.stringValue,
+    //         desc: content[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue,
+    //         title: content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue,
+    //         duration: content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue,
+    //         tags: tagsArr,
+    //     })
+
+    //     // These if statements cycle through the selected tab and push relevant icons into the tagsArr
+    //     if (content[sheetNum].data[0].rowData[i].values[5].effectiveValue.stringValue === "yes"){
+    //         tagsArr.push(eyesOpenIcon); 
+    //     }
+    //     if (content[sheetNum].data[0].rowData[i].values[4].effectiveValue.stringValue === "no"){
+    //         tagsArr.push(walkingIcon); 
+    //     }
+    //     if (content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue >= 900){
+    //         tagsArr.push(longIcon); 
+    //     }else{
+    //         tagsArr.push(shortIcon);
+    //     }
+    // }
     renderPlaylist(playlist);
 }
 
