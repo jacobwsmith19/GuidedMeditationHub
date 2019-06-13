@@ -148,6 +148,8 @@ function createPlaylist(sheetNum){
             duration: content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue,
             tags: tagsArr,
         })
+
+        // These if statements cycle through the selected tab and push relevant icons into the tagsArr
         if (content[sheetNum].data[0].rowData[i].values[5].effectiveValue.stringValue === "yes"){
             tagsArr.push(eyesOpenIcon); 
         }
