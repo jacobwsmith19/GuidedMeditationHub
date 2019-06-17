@@ -1,8 +1,16 @@
-// Spread sheet tab key
-var shortSheet = 4;
-var longSheet = 5;
-var walkingSheet = 1;
-var eyesOpenSheet = 3;
+// FIRST TRACK KEY:
+// 0-Title: response.sheets[0].data[0].rowData[1].values[0].effectiveValue.stringValue
+// 1-File: response.sheets[0].data[0].rowData[1].values[1].effectiveValue.stringValue
+// 2-First: response.sheets[0].data[0].rowData[1].values[2].effectiveValue.stringValue
+// 3-Last: response.sheets[0].data[0].rowData[1].values[3].effectiveValue.stringValue
+// 4-Duration: response.sheets[0].data[0].rowData[1].values[4].effectiveValue.numberValue
+// 5-Description: response.sheets[0].data[0].rowData[1].values[5].effectiveValue.stringValue
+// 6-Short: response.sheets[0].data[0].rowData[1].values[6].effectiveValue.boolValue
+// 7-Long: response.sheets[0].data[0].rowData[1].values[7].effectiveValue.boolValue
+// 8-Eyes-open: response.sheets[0].data[0].rowData[1].values[8].effectiveValue.boolValue
+// 9-Sound: response.sheets[0].data[0].rowData[1].values[9].effectiveValue.boolValue
+// 10-Walking: response.sheets[0].data[0].rowData[1].values[10].effectiveValue.boolValue
+// 11-Lecture: response.sheets[0].data[0].rowData[1].values[11].effectiveValue.boolValue
 
 // Global variables
 var playlist = [];
@@ -10,14 +18,14 @@ var playingIndex = 0;
 var content;
 var tagsArr = [];
 
-// Icons for tags
-var eyesOpenIcon = `<i class="far fa-eye"></i>`;
-var walkingIcon = `<i class="fas fa-walking"></i>`;
-var longIcon = `<i class="fas fa-hourglass-half"></i>`;
-var shortIcon = `<i class="fas fa-stopwatch"></i>`;
-
-// Hold active filter options
-let filters = [];
+// Legend for filters
+var filtersArr = [];
+const shortFilter = 6;
+const longFilter = 7;
+const eyesOpenFilter = 8;
+const soundFilter = 9;
+const walkingFilter = 10;
+const lectureFilter = 11;
 
 // Hides description box & disables next/prev/shuff buttons until track is clicked
 $('#description-div').hide();
@@ -28,64 +36,97 @@ $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
     content = response.sheets;
     // Filter buttons enabled after AJAX call to prevent error
     $('#short-button').attr("disabled", false);
     $('#long-button').attr("disabled", false);
     $('#walking-button').attr("disabled", false);
     $('#eyes-open-button').attr("disabled", false);
+    $('#sound-button').attr("disabled", false);
+    $('#lecture-button').attr("disabled", false);
 }); 
+
+console.log(filtersArr);
 
 // Short button
 $("#short-button").on("click", function(){
+    //sheetNum = shortSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
-        filters = filters.filter(x => x != 4);
+        filtersArr = filtersArr.filter(x => x != shortFilter);
     } else {
         $(this).addClass('active');
-        filters.push(4);
+        filtersArr.push(shortFilter);
     }
-
+    console.log(filtersArr);
     createPlaylist();
 });
 
 // Long button
 $("#long-button").on("click", function(){
+    //sheetNum = longSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
-        filters = filters.filter(x => x != 5);
+        filtersArr = filtersArr.filter(x => x != longFilter);
     } else {
         $(this).addClass('active');
-        filters.push(5);
+        filtersArr.push(longFilter);
     }
-
+    console.log(filtersArr);
     createPlaylist();
 }); 
 
 // Walking button
 $("#walking-button").on("click", function(){
+    //sheetNum = walkingSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
-        filters = filters.filter(x => x != 1);
+        filtersArr = filtersArr.filter(x => x != walkingFilter);
     } else {
         $(this).addClass('active');
-        filters.push(1);
+        filtersArr.push(walkingFilter);
     }
-
+    console.log(filtersArr);
     createPlaylist();
 }); 
 
 // Eyes open button
 $("#eyes-open-button").on("click", function(){
+    //sheetNum = eyesOpenSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
-        filters = filters.filter(x => x != 3);
+        filtersArr = filtersArr.filter(x => x != eyesOpenFilter);
     } else {
         $(this).addClass('active');
-        filters.push(3);
+        filtersArr.push(eyesOpenFilter);
     }
+    console.log(filtersArr);
+    createPlaylist();
+}); 
 
+// Lecture button
+$("#lecture-button").on("click", function(){
+    if ($(this).hasClass('active')){
+        $(this).removeClass('active');
+        filtersArr = filtersArr.filter(x => x != lectureFilter);
+    } else {
+        $(this).addClass('active');
+        filtersArr.push(lectureFilter);
+    }
+    console.log(filtersArr);
+    createPlaylist();
+}); 
+
+// Sound button
+$("#sound-button").on("click", function(){
+    if ($(this).hasClass('active')){
+        $(this).removeClass('active');
+        filtersArr = filtersArr.filter(x => x != soundFilter);
+    } else {
+        $(this).addClass('active');
+        filtersArr.push(soundFilter);
+    }
+    console.log(filtersArr);
     createPlaylist();
 }); 
 
@@ -114,6 +155,8 @@ $("#next-button").on("click", function(){
 
     $('.playing').attr('class', "current-playlist");
     $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
+
+    console.log("playingIndex: " + playingIndex);
 })
 
 // Previous button
@@ -142,6 +185,7 @@ $("#previous-button").on("click", function(){
     $('.playing').attr('class', "current-playlist");
     $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
 
+    console.log("playingIndex: " + playingIndex);
 })
 
 // Shuffle button
@@ -162,61 +206,77 @@ $("#shuffle-button").on("click", function(){
     renderPlaylist(playlist);
     playingIndex = playlist.indexOf(track);
     $(`.current-playlist[data-index="${playlist.indexOf(track)}"]`).attr('class', 'current-playlist playing');
+
+    console.log("playingIndex: " + playingIndex);
 })
 
-// Populates playlist array based on button clicked
+// Populates playlist array
 function createPlaylist(){
     $('#description-div').show();
     $("#playlist").html("");
-    console.log(filters)
-    var playlist = [];
-    const baseFilterIndex = filters[0] || -1;
-    const additionalFilters = filters.slice(1);
-    
-    // Gather filtered tracks
-    for (var i = 0; i < baseFilterIndex; i++){
-        var track = content[baseFilterIndex].data[i].rowData[i].values;
-        console.log(1212121212121, track)
-        var found = false
-        additionalFilters.forEach(filterIndex => {
-            found = content[filterIndex].data.indexOf(track) >= 0 
-        })
-        if (found){
-            playlist.push({
-                src: track.effectiveValue.stringValue,
-                desc: track.effectiveValue.stringValue,
-                title: track.effectiveValue.stringValue,
-                duration: track.effectiveValue.numberValue,
-                tags: tagsArr,
-            })
-        }
-    }
-    
-    // for (i = 1; i < content[sheetNum].data[0].rowData.length; i++){
-    //     tagsArr = [];
-    //     playlist.push({
-    //         src: content[sheetNum].data[0].rowData[i].values[0].effectiveValue.stringValue,
-    //         desc: content[sheetNum].data[0].rowData[i].values[7].effectiveValue.stringValue,
-    //         title: content[sheetNum].data[0].rowData[i].values[6].effectiveValue.stringValue,
-    //         duration: content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue,
-    //         tags: tagsArr,
-    //     })
+    playlist = [];
 
-    //     // These if statements cycle through the selected tab and push relevant icons into the tagsArr
-    //     if (content[sheetNum].data[0].rowData[i].values[5].effectiveValue.stringValue === "yes"){
-    //         tagsArr.push(eyesOpenIcon); 
-    //     }
-    //     if (content[sheetNum].data[0].rowData[i].values[4].effectiveValue.stringValue === "no"){
-    //         tagsArr.push(walkingIcon); 
-    //     }
-    //     if (content[sheetNum].data[0].rowData[i].values[3].effectiveValue.numberValue >= 900){
-    //         tagsArr.push(longIcon); 
-    //     }else{
-    //         tagsArr.push(shortIcon);
-    //     }
-    // }
+    for (i = 1; i < content[0].data[0].rowData.length; i++){
+
+        if (filtersArr.length === 1){
+            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue){
+                playlist.push({
+                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                });
+            }
+        }else if (filtersArr.length === 2){
+            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue){
+                playlist.push({
+                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                });
+            }
+        }else if (filtersArr.length === 3){
+            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue){
+                playlist.push({
+                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                });
+            }
+        }else if (filtersArr.length === 4){
+            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue){
+                playlist.push({
+                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                });
+            } 
+        }else if (filtersArr.length === 5){
+            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[4]].effectiveValue.boolValue){
+                playlist.push({
+                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                });
+            }
+        }else if (filtersArr.length === 6){
+            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[4]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[5]].effectiveValue.boolValue){
+                playlist.push({
+                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                });
+            }
+        }   
+    };
+    console.log(playlist);
     renderPlaylist(playlist);
-}
+};
 
 // Populates playlist div based on playlist array
 function renderPlaylist(playlist){
@@ -273,5 +333,3 @@ function playAudio(){
 
     });
 }
-
-
