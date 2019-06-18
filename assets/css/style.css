@@ -18,6 +18,11 @@ body {
     border-color:  rgba(243, 94, 26, 0.747); 
 }
 
+/* Selected filter buttons */
+.btn-warning:not(:disabled):not(.disabled).active {
+box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
+}
+
 #next-button, #previous-button, #shuffle-button {
     height: 50px;
     width: 120px;

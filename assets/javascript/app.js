@@ -44,19 +44,22 @@ $.ajax({
     $('#eyes-open-button').attr("disabled", false);
     $('#sound-button').attr("disabled", false);
     $('#lecture-button').attr("disabled", false);
+    $('#favorites-button').attr("disabled", false);
+    allTracks();
 }); 
 
 console.log(filtersArr);
 
 // Short button
 $("#short-button").on("click", function(){
-    //sheetNum = shortSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
         filtersArr = filtersArr.filter(x => x != shortFilter);
     } else {
         $(this).addClass('active');
+        $('#long-button').removeClass('active');
         filtersArr.push(shortFilter);
+        filtersArr = filtersArr.filter(x => x != longFilter);
     }
     console.log(filtersArr);
     createPlaylist();
@@ -64,13 +67,14 @@ $("#short-button").on("click", function(){
 
 // Long button
 $("#long-button").on("click", function(){
-    //sheetNum = longSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
         filtersArr = filtersArr.filter(x => x != longFilter);
     } else {
         $(this).addClass('active');
+        $('#short-button').removeClass('active');
         filtersArr.push(longFilter);
+        filtersArr = filtersArr.filter(x => x != shortFilter);
     }
     console.log(filtersArr);
     createPlaylist();
@@ -78,7 +82,6 @@ $("#long-button").on("click", function(){
 
 // Walking button
 $("#walking-button").on("click", function(){
-    //sheetNum = walkingSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
         filtersArr = filtersArr.filter(x => x != walkingFilter);
@@ -92,7 +95,6 @@ $("#walking-button").on("click", function(){
 
 // Eyes open button
 $("#eyes-open-button").on("click", function(){
-    //sheetNum = eyesOpenSheet;
     if ($(this).hasClass('active')){
         $(this).removeClass('active');
         filtersArr = filtersArr.filter(x => x != eyesOpenFilter);
@@ -215,68 +217,88 @@ function createPlaylist(){
     $('#description-div').show();
     $("#playlist").html("");
     playlist = [];
+    if (filtersArr.length === 0){
+        allTracks();
+    }else{
+        for (i = 1; i < content[0].data[0].rowData.length; i++){
 
-    for (i = 1; i < content[0].data[0].rowData.length; i++){
-
-        if (filtersArr.length === 1){
-            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue){
-                playlist.push({
-                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
-                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
-                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
-                });
-            }
-        }else if (filtersArr.length === 2){
-            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue){
-                playlist.push({
-                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
-                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
-                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
-                });
-            }
-        }else if (filtersArr.length === 3){
-            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue){
-                playlist.push({
-                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
-                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
-                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
-                });
-            }
-        }else if (filtersArr.length === 4){
-            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue){
-                playlist.push({
-                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
-                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
-                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
-                });
-            } 
-        }else if (filtersArr.length === 5){
-            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[4]].effectiveValue.boolValue){
-                playlist.push({
-                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
-                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
-                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
-                });
-            }
-        }else if (filtersArr.length === 6){
-            if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[4]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[5]].effectiveValue.boolValue){
-                playlist.push({
-                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
-                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
-                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
-                });
-            }
-        }   
-    };
+            if (filtersArr.length === 1){
+                if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue){
+                    playlist.push({
+                        src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                        desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                        title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                    });
+                }
+            }else if (filtersArr.length === 2){
+                if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue){
+                    playlist.push({
+                        src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                        desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                        title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                    });
+                }
+            }else if (filtersArr.length === 3){
+                if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue){
+                    playlist.push({
+                        src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                        desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                        title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                    });
+                }
+            }else if (filtersArr.length === 4){
+                if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue){
+                    playlist.push({
+                        src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                        desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                        title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                    });
+                } 
+            }else if (filtersArr.length === 5){
+                if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[4]].effectiveValue.boolValue){
+                    playlist.push({
+                        src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                        desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                        title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                    });
+                }
+            }else if (filtersArr.length === 6){
+                if (content[0].data[0].rowData[i].values[filtersArr[0]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[1]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[3]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[2]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[4]].effectiveValue.boolValue && content[0].data[0].rowData[i].values[filtersArr[5]].effectiveValue.boolValue){
+                    playlist.push({
+                        src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                        desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                        title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                    });
+                }
+            }   
+        };
+    }
     console.log(playlist);
     renderPlaylist(playlist);
 };
+
+// Loads all tracks into playlist
+function allTracks(){
+    $('#description-div').show();
+    $("#playlist").html("");
+    playlist = [];
+
+    for (i = 1; i < content[0].data[0].rowData.length; i++){
+        playlist.push({
+            src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+            desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+            title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+            duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+        });
+    }
+    renderPlaylist(playlist);
+}
 
 // Populates playlist div based on playlist array
 function renderPlaylist(playlist){
