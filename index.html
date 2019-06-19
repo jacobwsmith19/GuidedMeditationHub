@@ -19,10 +19,10 @@
 </head>
 
 <body>
-<div class="container-full-bg">
+<div class="container">
     
     <div class="jumbotron">
-        <div class="container">
+        <div class="text-center">
           <strong>Guided Meditation Hub</strong>
         </div>
     </div>
@@ -41,7 +41,7 @@
     </br>
 
     <div class="text-center" id="audio-player-div">
-        <audio id= "audioPlayer" controls preload="metadata">
+        <audio id= "audioPlayer" controls preload="metadata" style=" width:600px;">
            <source id= "currentlyPlaying" src="" type="audio/mpeg">
            Your browser does not support the audio element.
        </audio>  
@@ -56,14 +56,12 @@
     </br>
 
     <div class="row justify-content-center">
-        <div class="col-12" id="description-div">
+        <div class="col-5" id="playlist">
+        </div>
+        <div class="col-5" id="description-div">
             <strong>Playing: </strong><span id="current-meditation"></span>
             </br>
             <strong>Description: </strong><span id="description"></span>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-12" id="playlist">
         </div>
     </div>
 
