@@ -6,7 +6,10 @@ body {
     background-color: rgba(243, 94, 26, 0.747); 
     color: rgb(213, 250, 3);
     font-family: 'Sue Ellen Francisco', cursive;
-    font-size: 100px;
+    font-size: 110px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px;
 }
 
 .btn {
@@ -24,15 +27,15 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 }
 
 #next-button, #previous-button, #shuffle-button {
-    height: 50px;
-    width: 120px;
+    height: 100px;
+    width: 220px;
     margin-top: 6px;
     margin-left: 5px;
     margin-right: 5px;
     background-color: rgba(243, 94, 26, 0.747); 
     border-radius: 30px;
     font-family: 'Hind Madurai', sans-serif;
-    font-size: 20px;
+    font-size: 30px;
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -49,14 +52,15 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
     background-color: #ffc107;
-    margin: 2px;
+    margin: 4px;
     border-radius: .25rem;
     cursor: pointer;
-    height: 60px;
+    height: 100px;
     vertical-align: center;
-    padding: 14px;
+    text-align: center;
+    padding-top: 20px;
     font-family: 'Hind Madurai', sans-serif;
-    font-size: 20px;
+    font-size: 40px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -75,16 +79,17 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
     background-color:rgba(243, 94, 26, 0.747); 
-    margin: 2px;
+    margin: 10px;
     border-radius: .25rem;
-    height: 100%;
-    padding: 10px;
+    height: 150px;
+    padding-left: 30px;
     font-family: 'Hind Madurai', sans-serif;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 #audioPlayer {
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
     border-radius: 30px;
+    width: 95%;
 }
