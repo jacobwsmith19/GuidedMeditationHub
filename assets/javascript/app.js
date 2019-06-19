@@ -45,6 +45,7 @@ $.ajax({
     $('#sound-button').attr("disabled", false);
     $('#lecture-button').attr("disabled", false);
     $('#favorites-button').attr("disabled", false);
+    $('#add-button').attr("disabled", false);
     allTracks();
 }); 
 
@@ -355,3 +356,51 @@ function playAudio(){
 
     });
 }
+
+// Local storage
+$("#add-button").on("click", function() {
+ var userFavorites = [{
+    src: content[0].data[0].rowData[1].values[1].effectiveValue.stringValue,
+    desc: content[0].data[0].rowData[1].values[5].effectiveValue.stringValue,
+    title: content[0].data[0].rowData[1].values[0].effectiveValue.stringValue,
+    duration: content[0].data[0].rowData[1].values[4].effectiveValue.numberValue
+}, {
+    src: content[0].data[0].rowData[2].values[1].effectiveValue.stringValue,
+    desc: content[0].data[0].rowData[2].values[5].effectiveValue.stringValue,
+    title: content[0].data[0].rowData[2].values[0].effectiveValue.stringValue,
+    duration: content[0].data[0].rowData[2].values[4].effectiveValue.numberValue
+}, {
+    src: content[0].data[0].rowData[3].values[1].effectiveValue.stringValue,
+    desc: content[0].data[0].rowData[3].values[5].effectiveValue.stringValue,
+    title: content[0].data[0].rowData[3].values[0].effectiveValue.stringValue,
+    duration: content[0].data[0].rowData[3].values[4].effectiveValue.numberValue
+}];
+
+ localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
+
+})
+
+
+ $("#favorites-button").on("click", function() {
+    playlist = [];
+    $("#playlist").html("");
+    var retrievedData = localStorage.getItem("localFavorites");
+    var storedFavorites = JSON.parse(retrievedData);
+    const formattedDuration = moment.utc(storedFavorites[0].duration*1000).format('m:ss');
+
+    for (k = 0; k < storedFavorites.length; k++){
+    $("#playlist").append(`
+    <div class= 'current-playlist' 
+    src= '${storedFavorites[k].src}' 
+    description= '${storedFavorites[k].desc}'
+    title= '${storedFavorites[k].title}'
+    duration = '${storedFavorites[k].duration}'
+    tags= '${storedFavorites[k].tags}'
+    data-index='${k}'>&nbsp; 
+    ${storedFavorites[k].title}&nbsp;(${formattedDuration})
+    </div>`);
+    }
+
+    console.log(storedFavorites[0].desc);
+    playAudio();
+ })
