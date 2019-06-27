@@ -295,7 +295,8 @@ function allTracks(){
             src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
             desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
             title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-            duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+            duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+            row: i
         });
     }
     renderPlaylist(playlist);
@@ -313,7 +314,8 @@ function renderPlaylist(playlist){
             title= '${item.title}'
             duration = '${item.duration}'
             tags= '${item.tags}'
-            data-index='${i}'>&nbsp; 
+            data-index='${i}'
+            data-row='${item.row}'>&nbsp; 
             ${item.title}&nbsp;(${formattedDuration})
             </div>
         `);
@@ -358,23 +360,31 @@ function playAudio(){
 
 // Local storage
 $("#add-button").on("click", function() {
- var userFavorites = [{
-    src: content[0].data[0].rowData[1].values[1].effectiveValue.stringValue,
-    desc: content[0].data[0].rowData[1].values[5].effectiveValue.stringValue,
-    title: content[0].data[0].rowData[1].values[0].effectiveValue.stringValue,
-    duration: content[0].data[0].rowData[1].values[4].effectiveValue.numberValue
-}, {
-    src: content[0].data[0].rowData[2].values[1].effectiveValue.stringValue,
-    desc: content[0].data[0].rowData[2].values[5].effectiveValue.stringValue,
-    title: content[0].data[0].rowData[2].values[0].effectiveValue.stringValue,
-    duration: content[0].data[0].rowData[2].values[4].effectiveValue.numberValue
-}, {
-    src: content[0].data[0].rowData[3].values[1].effectiveValue.stringValue,
-    desc: content[0].data[0].rowData[3].values[5].effectiveValue.stringValue,
-    title: content[0].data[0].rowData[3].values[0].effectiveValue.stringValue,
-    duration: content[0].data[0].rowData[3].values[4].effectiveValue.numberValue
-}];
-
+//  var userFavorites = [{
+//     src: content[0].data[0].rowData[1].values[1].effectiveValue.stringValue,
+//     desc: content[0].data[0].rowData[1].values[5].effectiveValue.stringValue,
+//     title: content[0].data[0].rowData[1].values[0].effectiveValue.stringValue,
+//     duration: content[0].data[0].rowData[1].values[4].effectiveValue.numberValue
+// }, {
+//     src: content[0].data[0].rowData[2].values[1].effectiveValue.stringValue,
+//     desc: content[0].data[0].rowData[2].values[5].effectiveValue.stringValue,
+//     title: content[0].data[0].rowData[2].values[0].effectiveValue.stringValue,
+//     duration: content[0].data[0].rowData[2].values[4].effectiveValue.numberValue
+// }, {
+//     src: content[0].data[0].rowData[3].values[1].effectiveValue.stringValue,
+//     desc: content[0].data[0].rowData[3].values[5].effectiveValue.stringValue,
+//     title: content[0].data[0].rowData[3].values[0].effectiveValue.stringValue,
+//     duration: content[0].data[0].rowData[3].values[4].effectiveValue.numberValue
+// }];
+ var trackRow = $('.playing').attr('data-row');
+ var favoriteItem = {
+        src: content[0].data[0].rowData[trackRow].values[1].effectiveValue.stringValue,
+        desc: content[0].data[0].rowData[trackRow].values[5].effectiveValue.stringValue,
+        title: content[0].data[0].rowData[trackRow].values[0].effectiveValue.stringValue,
+        duration: content[0].data[0].rowData[trackRow].values[4].effectiveValue.numberValue
+    };
+ var userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
+ userFavorites.push(favoriteItem);
  localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
 
 })
