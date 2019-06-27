@@ -353,7 +353,6 @@ function playAudio(){
 
         playingIndex = $(this).attr('data-index');
         console.log("playingIndex: " + playingIndex);
-
     });
 }
 
