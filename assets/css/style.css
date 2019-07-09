@@ -7,6 +7,8 @@ body {
     color: rgb(213, 250, 3);
     font-family: 'Sue Ellen Francisco', cursive;
     font-size: 100px;
+    padding: 0px;
+    margin-top: 75px;
 }
 
 .btn {
