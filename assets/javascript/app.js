@@ -229,7 +229,8 @@ function createPlaylist(){
                         src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                        row: i
                     });
                 }
             }else if (filtersArr.length === 2){
@@ -238,7 +239,8 @@ function createPlaylist(){
                         src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                        row: i
                     });
                 }
             }else if (filtersArr.length === 3){
@@ -247,7 +249,8 @@ function createPlaylist(){
                         src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                        row: i
                     });
                 }
             }else if (filtersArr.length === 4){
@@ -256,7 +259,8 @@ function createPlaylist(){
                         src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                        row: i
                     });
                 } 
             }else if (filtersArr.length === 5){
@@ -265,7 +269,8 @@ function createPlaylist(){
                         src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                        row: i
                     });
                 }
             }else if (filtersArr.length === 6){
@@ -274,7 +279,8 @@ function createPlaylist(){
                         src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
-                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue
+                        duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                        row: i
                     });
                 }
             }   
@@ -290,13 +296,16 @@ function allTracks(){
     $("#playlist").html("");
     playlist = [];
 
+    //Get favorites
     for (i = 1; i < content[0].data[0].rowData.length; i++){
+        //likestatus = favorites.contains
         playlist.push({
             src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
             desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
             title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
             duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
             row: i
+            //liked = true/false
         });
     }
     renderPlaylist(playlist);
