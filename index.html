@@ -19,15 +19,52 @@
 </head>
 
 <body>
-<div class="container">
-    
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="https://opengameart.org/sites/default/files/cloud-preview.png" width="30" height="30" alt="">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filters
+                    </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <button class="dropdown-item" type="button" id="short-button">Short (5-15 min)</button>
+                    <button class="dropdown-item" type="button" id="long-button">Long (15+ min)</button>
+                    <button class="dropdown-item" type="button" id="walking-button">Walking</button>
+                    <button class="dropdown-item" type="button" id="eyes-open-button">Eyes Open</button>
+                    <button class="dropdown-item" type="button" id="sound-button">Sounds</button>
+                    <button class="dropdown-item" type="button" id="lecture-button">Lectures</button>
+                    <button class="dropdown-item" type="button" id="add-button">Add Favorites</button>
+                    <button class="dropdown-item" type="button" id="favorites-button">My Favorites</button>
+                </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="jumbotron">
         <div class="text-center">
-          <strong>Guided Meditation Hub</strong>
+            <strong>Guided Meditation Hub</strong>
         </div>
     </div>
+
+<div class="container">
+    
+    
        
-    <div class="text-center" id="options-buttons">
+    <!-- <div class="text-center" id="options-buttons">
         <button type="button" class="btn btn-warning" disabled= "true" id="short-button">Short (5-15 min)</button>
         <button type="button" class="btn btn-warning" disabled= "true" id="long-button">Long (15+ min)</button>
         <button type="button" class="btn btn-warning" disabled= "true" id="favorites-button">My Favorites</button>
@@ -39,7 +76,7 @@
         <button type="button" class="btn btn-warning" disabled= "true" id="sound-button">Sounds </button>
         <button type="button" class="btn btn-warning" disabled= "true" id="lecture-button">Lectures </button>
     </div>
-    </br>
+    </br> -->
 
     <div class="text-center" id="audio-player-div">
         <audio id= "audioPlayer" controls preload="metadata" style=" width:600px;">
@@ -71,6 +108,8 @@
 
 <!-- JavaScript link -->
 <script src="assets/javascript/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>
