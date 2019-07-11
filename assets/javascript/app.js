@@ -46,6 +46,7 @@ $.ajax({
     $('#lecture-button').attr("disabled", false);
     $('#favorites-button').attr("disabled", false);
     $('#add-button').attr("disabled", false);
+    $('#remove-button').attr("disabled", false);
     allTracks();
 }); 
 
@@ -379,11 +380,30 @@ $("#add-button").on("click", function() {
                     desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                     title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
                     duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                    id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
                 });
         
             }
         }
     }
     renderPlaylist(playlist);
+})
+
+// Remove button
+$("#remove-button").on("click", function() {
+    var currentId = $('.playing').attr('id');
+    userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
+    console.log("User favorites: " + userFavorites);
+    console.log("Current ID: " + currentId);
+
+    for (i = userFavorites.length - 1; i >= 0; i--){
+        if (userFavorites[i] === currentId){
+            userFavorites.splice(i, 1);
+        }
+    }
+
+    console.log("Updated user Favorites: " + userFavorites);
+    localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
+
 })
  
