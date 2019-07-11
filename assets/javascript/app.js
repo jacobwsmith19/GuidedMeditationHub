@@ -11,12 +11,12 @@
 // 9-Sound: response.sheets[0].data[0].rowData[1].values[9].effectiveValue.boolValue
 // 10-Walking: response.sheets[0].data[0].rowData[1].values[10].effectiveValue.boolValue
 // 11-Lecture: response.sheets[0].data[0].rowData[1].values[11].effectiveValue.boolValue
+// 12-id: response.sheets[0].data[0].rowData[1].values[12].effectiveValue.numberValue
 
 // Global variables
 var playlist = [];
 var playingIndex = 0;
 var content;
-var tagsArr = [];
 
 // Legend for filters
 var filtersArr = [];
@@ -152,10 +152,6 @@ $("#next-button").on("click", function(){
     $("#current-meditation").html("");
     $("#current-meditation").append(playNext.title);
 
-    // Clears tags, then populates with data from title column in spread sheet
-    $("#tags").html("");
-    $("#tags").append(playNext.tags);
-
     $('.playing').attr('class', "current-playlist");
     $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
 
@@ -180,10 +176,6 @@ $("#previous-button").on("click", function(){
     // Clears currently playing box, then populates with data from title column in spread sheet
     $("#current-meditation").html("");
     $("#current-meditation").append(playPrev.title);
-
-    // Clears tags box, then populates with data from title column in spread sheet
-    $("#tags").html("");
-    $("#tags").append(playPrev.tags);
 
     $('.playing').attr('class', "current-playlist");
     $(`.current-playlist[data-index="${playingIndex}"]`).attr('class', 'current-playlist playing');
@@ -230,7 +222,7 @@ function createPlaylist(){
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
                         duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
-                        row: i
+                        id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
                     });
                 }
             }else if (filtersArr.length === 2){
@@ -240,7 +232,7 @@ function createPlaylist(){
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
                         duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
-                        row: i
+                        id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
                     });
                 }
             }else if (filtersArr.length === 3){
@@ -250,7 +242,7 @@ function createPlaylist(){
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
                         duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
-                        row: i
+                        id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
                     });
                 }
             }else if (filtersArr.length === 4){
@@ -260,7 +252,7 @@ function createPlaylist(){
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
                         duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
-                        row: i
+                        id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
                     });
                 } 
             }else if (filtersArr.length === 5){
@@ -270,7 +262,7 @@ function createPlaylist(){
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
                         duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
-                        row: i
+                        id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
                     });
                 }
             }else if (filtersArr.length === 6){
@@ -280,7 +272,7 @@ function createPlaylist(){
                         desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
                         title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
                         duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
-                        row: i
+                        id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
                     });
                 }
             }   
@@ -304,8 +296,7 @@ function allTracks(){
             desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
             title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
             duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
-            row: i
-            //liked = true/false
+            id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
         });
     }
     renderPlaylist(playlist);
@@ -322,9 +313,8 @@ function renderPlaylist(playlist){
             description= '${item.desc}'
             title= '${item.title}'
             duration = '${item.duration}'
-            tags= '${item.tags}'
             data-index='${i}'
-            data-row='${item.row}'>&nbsp; 
+            id='${item.id}'>&nbsp; 
             ${item.title}&nbsp;(${formattedDuration})
             </div>
         `);
@@ -358,67 +348,42 @@ function playAudio(){
         $("#current-meditation").html("");
         $("#current-meditation").append($(this).attr("title"));
 
-        // Clears tags box, then populates with data from title column in spread sheet
-        $("#tags").html("");
-        $("#tags").append($(this).attr("tags"));
-
         playingIndex = $(this).attr('data-index');
         console.log("playingIndex: " + playingIndex);
     });
 }
 
 // Local storage
-$("#add-button").on("click", function() {
-//  var userFavorites = [{
-//     src: content[0].data[0].rowData[1].values[1].effectiveValue.stringValue,
-//     desc: content[0].data[0].rowData[1].values[5].effectiveValue.stringValue,
-//     title: content[0].data[0].rowData[1].values[0].effectiveValue.stringValue,
-//     duration: content[0].data[0].rowData[1].values[4].effectiveValue.numberValue
-// }, {
-//     src: content[0].data[0].rowData[2].values[1].effectiveValue.stringValue,
-//     desc: content[0].data[0].rowData[2].values[5].effectiveValue.stringValue,
-//     title: content[0].data[0].rowData[2].values[0].effectiveValue.stringValue,
-//     duration: content[0].data[0].rowData[2].values[4].effectiveValue.numberValue
-// }, {
-//     src: content[0].data[0].rowData[3].values[1].effectiveValue.stringValue,
-//     desc: content[0].data[0].rowData[3].values[5].effectiveValue.stringValue,
-//     title: content[0].data[0].rowData[3].values[0].effectiveValue.stringValue,
-//     duration: content[0].data[0].rowData[3].values[4].effectiveValue.numberValue
-// }];
- var trackRow = $('.playing').attr('data-row');
- var favoriteItem = {
-        src: content[0].data[0].rowData[trackRow].values[1].effectiveValue.stringValue,
-        desc: content[0].data[0].rowData[trackRow].values[5].effectiveValue.stringValue,
-        title: content[0].data[0].rowData[trackRow].values[0].effectiveValue.stringValue,
-        duration: content[0].data[0].rowData[trackRow].values[4].effectiveValue.numberValue
-    };
- var userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
- userFavorites.push(favoriteItem);
- localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
 
+// Adds the track ID of currently playing track to the local storage array
+$("#add-button").on("click", function() {
+    var favoriteItem = $('.playing').attr('id');
+    var userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
+    console.log("User favorites: " + userFavorites);
+    userFavorites.push(favoriteItem);
+    localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
 })
 
-
+// Renders playlist from track IDs stored locally
  $("#favorites-button").on("click", function() {
+    var currentFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
+    console.log("Track IDs stored locally: " + currentFavorites);
     playlist = [];
-    $("#playlist").html("");
-    var retrievedData = localStorage.getItem("localFavorites");
-    var storedFavorites = JSON.parse(retrievedData);
-    const formattedDuration = moment.utc(storedFavorites[0].duration*1000).format('m:ss');
-
-    for (k = 0; k < storedFavorites.length; k++){
-    $("#playlist").append(`
-    <div class= 'current-playlist' 
-    src= '${storedFavorites[k].src}' 
-    description= '${storedFavorites[k].desc}'
-    title= '${storedFavorites[k].title}'
-    duration = '${storedFavorites[k].duration}'
-    tags= '${storedFavorites[k].tags}'
-    data-index='${k}'>&nbsp; 
-    ${storedFavorites[k].title}&nbsp;(${formattedDuration})
-    </div>`);
+    for (j = 0; j < currentFavorites.length; j++){
+        for (i = 1; i < content[0].data[0].rowData.length; i++){
+            if (content[0].data[0].rowData[i].values[12].effectiveValue.numberValue == currentFavorites[j]){
+                console.log(currentFavorites[j] +": " + content[0].data[0].rowData[i].values[0].effectiveValue.stringValue);
+        
+                playlist.push({
+                    src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
+                    desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
+                    title: content[0].data[0].rowData[i].values[0].effectiveValue.stringValue,
+                    duration: content[0].data[0].rowData[i].values[4].effectiveValue.numberValue,
+                });
+        
+            }
+        }
     }
-
-    console.log(storedFavorites[0].desc);
-    playAudio();
- })
+    renderPlaylist(playlist);
+})
+ 
