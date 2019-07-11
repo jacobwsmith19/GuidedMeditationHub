@@ -17,6 +17,7 @@
 var playlist = [];
 var playingIndex = 0;
 var content;
+var heart;
 
 // Legend for filters
 var filtersArr = [];
@@ -47,6 +48,7 @@ $.ajax({
     $('#favorites-button').attr("disabled", false);
     $('#add-button').attr("disabled", false);
     $('#remove-button').attr("disabled", false);
+    $('#all-button').attr("disabled", false);
     allTracks();
 }); 
 
@@ -134,6 +136,11 @@ $("#sound-button").on("click", function(){
     createPlaylist();
 }); 
 
+// All tracks button
+$("#all-button").on("click", function(){
+    allTracks();
+});
+
 // Next button
 $("#next-button").on("click", function(){
     playingIndex++;
@@ -184,8 +191,8 @@ $("#previous-button").on("click", function(){
     console.log("playingIndex: " + playingIndex);
 })
 
-// Shuffle button
-$("#shuffle-button").on("click", function(){
+// Shuffle function and button
+function shuffleTracks(){
     var currentIndex = playlist.length;
     var temporaryValue;
     var randomIndex;
@@ -204,6 +211,10 @@ $("#shuffle-button").on("click", function(){
     $(`.current-playlist[data-index="${playlist.indexOf(track)}"]`).attr('class', 'current-playlist playing');
 
     console.log("playingIndex: " + playingIndex);
+}
+
+$("#shuffle-button").on("click", function(){
+    shuffleTracks();
 })
 
 // Populates playlist array
@@ -301,13 +312,22 @@ function allTracks(){
         });
     }
     renderPlaylist(playlist);
+    shuffleTracks();
 }
 
 // Populates playlist div based on playlist array
 function renderPlaylist(playlist){
     $("#playlist").html("");
+    userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
+    console.log(userFavorites);
     playlist.forEach((item, i) => {
         const formattedDuration = moment.utc(item.duration*1000).format('m:ss');
+        const stringNum = item.id.toString();
+        if (userFavorites.includes(stringNum)){
+            heart = `<i class="fas fa-heart"></i>`;
+        }else{
+            heart = "";
+        }
         $("#playlist").append(`
             <div class= 'current-playlist' 
             src= '${item.src}' 
@@ -316,7 +336,7 @@ function renderPlaylist(playlist){
             duration = '${item.duration}'
             data-index='${i}'
             id='${item.id}'>&nbsp; 
-            ${item.title}&nbsp;(${formattedDuration})
+            ${item.title}&nbsp;(${formattedDuration})&nbsp;${heart}
             </div>
         `);
     });
@@ -360,8 +380,8 @@ function playAudio(){
 $("#add-button").on("click", function() {
     var favoriteItem = $('.playing').attr('id');
     var userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
-    console.log("User favorites: " + userFavorites);
     userFavorites.push(favoriteItem);
+    console.log("Updated local favorites: " + userFavorites);
     localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
 })
 
