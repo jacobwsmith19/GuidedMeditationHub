@@ -9,7 +9,9 @@
     <!-- jQuery link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- CSS link -->
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
+    <link rel="stylesheet" media="screen and (max-device-width: 800px)" href="assets/css/mobile.css">
+    <link rel="stylesheet" media="screen and (min-device-width: 801px)" href="assets/css/style.css">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Hind+Madurai:400,500|Sue+Ellen+Francisco" rel="stylesheet">
     <!-- Font Awesome -->
@@ -63,7 +65,7 @@
 <div class="container">
 <div class="audio-container">
     <div class="text-center" id="audio-player-div">
-        <audio id= "audioPlayer" controls preload="metadata" style=" width:600px;">
+        <audio id= "audioPlayer" controls preload="metadata" style="width:90%;">
            <source id= "currentlyPlaying" src="" type="audio/mpeg">
            Your browser does not support the audio element.
        </audio>  
@@ -75,21 +77,21 @@
         <button type="button" disabled= "true" id="previous-button">Previous <i class="fas fa-backward"></i></button>
         <button type="button" disabled= "true" id="shuffle-button">Shuffle <i class="fas fa-random"></i></button>
    </div>
+   <div class="col-md-auto" id="description-div">
+        <strong>Playing: </strong><span id="current-meditation"></span>
+        </br>
+        <strong>Description: </strong><span id="description"></span>
+        </br>
+        <button type="button" id="add-button" disabled= "true">Like Track</button>
+        <button type="button" id="remove-button" disabled= "true">Unlike Track</button>
+    </div>
 </div>
     </br>
 
     <div class="row justify-content-center">
-        <div class="col-5" id="playlist">
-        </div>
-        <div class="col-5" id="description-div">
-            <strong>Playing: </strong><span id="current-meditation"></span>
-            </br>
-            <strong>Description: </strong><span id="description"></span>
-            </br>
-            <button type="button" id="add-button" disabled= "true">Like Track</button>
-            <button type="button" id="remove-button" disabled= "true">Unlike Track</button>
-        </div>
-        
+        <div class="col-md-auto" id="playlist">
+            <!--Tracks render here-->
+        </div>   
     </div>
 
 <!-- Added to favorites modal -->
