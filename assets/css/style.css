@@ -156,3 +156,15 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     from {transform:rotate(0deg);}
     to {transform:rotate(360deg);}
 }
+
+.audio-container {
+    position: sticky;
+    z-index: 500;
+    top: 53px;
+    min-height: 120px;
+    background-color: rgba(253, 255, 157);
+}
+
+.dropdown-menu{
+    z-index: 5001;
+}
