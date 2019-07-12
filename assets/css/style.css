@@ -8,7 +8,7 @@ body {
     font-family: 'Sue Ellen Francisco', cursive;
     font-size: 100px;
     padding: 0px;
-    margin-top: 55px;
+    margin-top: 53px;
 }
 
 .btn {
@@ -160,11 +160,17 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 .audio-container {
     position: sticky;
     z-index: 500;
-    top: 53px;
+    top: 54px;
     min-height: 120px;
     background-color: rgba(253, 255, 157);
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .dropdown-menu{
     z-index: 5001;
+}
+
+#audio-player-controls {
+    padding-top:10px;
 }
