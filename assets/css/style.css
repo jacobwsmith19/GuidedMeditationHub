@@ -48,7 +48,7 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 }
 
 #add-button, #remove-button {
-    width: 49%;
+    width: 150px;
     background-color: rgba(243, 94, 26, 0.747); 
     border-radius: 30px;
     font-family: 'Hind Madurai', sans-serif;
@@ -142,4 +142,17 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     border-color:  rgba(243, 94, 26, 0.747); 
     border-radius: 5px;
     padding-top: 30px;
+}
+
+.navbar-brand:hover{
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    cursor: default;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
