@@ -22,7 +22,7 @@
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
-            <img src="https://opengameart.org/sites/default/files/cloud-preview.png" width="30" height="30" alt="">
+            <img src="https://image.flaticon.com/icons/png/128/124/124563.png" width="40" height="40" alt="">
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
@@ -47,8 +47,6 @@
                     <button class="dropdown-item" type="button" id="eyes-open-button">Eyes Open</button>
                     <button class="dropdown-item" type="button" id="sound-button">Sounds</button>
                     <button class="dropdown-item" type="button" id="lecture-button">Lectures</button>
-                    <button class="dropdown-item" type="button" id="add-button">Add to Favorites</button>
-                    <button class="dropdown-item" type="button" id="remove-button">Remove from Favorites</button>
                     <button class="dropdown-item" type="button" id="favorites-button">My Favorites</button>
                 </div>
                 </li>
@@ -86,9 +84,34 @@
             <strong>Playing: </strong><span id="current-meditation"></span>
             </br>
             <strong>Description: </strong><span id="description"></span>
+            </br>
+            <button type="button" id="add-button" disabled= "true">Like Track</button>
+            <button type="button" id="remove-button" disabled= "true">Unlike Track</button>
         </div>
         
     </div>
+
+<!-- Added to favorites modal -->
+    <div class="modal fade" id="overlay">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <p>Added to favorites!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<!-- Removed from favorites modal -->
+    <div class="modal fade" id="overlay2">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <p>Removed from favorites!</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
 </div> <!-- Close Container -->
 

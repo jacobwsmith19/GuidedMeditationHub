@@ -48,7 +48,7 @@ $.ajax({
     $('#favorites-button').attr("disabled", false);
     $('#add-button').attr("disabled", false);
     $('#remove-button').attr("disabled", false);
-    $('#all-button').attr("disabled", false);
+    $('#add-button').attr("disabled", false);
     allTracks();
 }); 
 
@@ -300,9 +300,7 @@ function allTracks(){
     $("#playlist").html("");
     playlist = [];
 
-    //Get favorites
     for (i = 1; i < content[0].data[0].rowData.length; i++){
-        //likestatus = favorites.contains
         playlist.push({
             src: content[0].data[0].rowData[i].values[1].effectiveValue.stringValue,
             desc: content[0].data[0].rowData[i].values[5].effectiveValue.stringValue,
@@ -336,7 +334,7 @@ function renderPlaylist(playlist){
             duration = '${item.duration}'
             data-index='${i}'
             id='${item.id}'>&nbsp; 
-            ${item.title}&nbsp;(${formattedDuration})&nbsp;${heart}
+            ${item.title}&nbsp;(${formattedDuration})&nbsp;<span id="heart">${heart}&nbsp;</span>
             </div>
         `);
     });
@@ -356,6 +354,8 @@ function playAudio(){
         $('#next-button').attr("disabled", false);
         $('#previous-button').attr("disabled", false);
         $('#shuffle-button').attr("disabled", false);
+        $('#add-button').attr("disabled", false);
+        $('#remove-button').attr("disabled", false);
         
         // Loads audio file into audio player
         $("#currentlyPlaying").attr("src", $(this).attr("src"));
@@ -380,9 +380,16 @@ function playAudio(){
 $("#add-button").on("click", function() {
     var favoriteItem = $('.playing').attr('id');
     var userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
+    //userFavorites = []; //*** Unhide this line and hide line below to clear out local storage***
     userFavorites.push(favoriteItem);
     console.log("Updated local favorites: " + userFavorites);
     localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
+    
+    // Added to favorites modal
+    $('#overlay').modal('show');
+    setTimeout(function() {
+        $('#overlay').modal('hide');
+    }, 850);
 })
 
 // Renders playlist from track IDs stored locally
@@ -424,6 +431,12 @@ $("#remove-button").on("click", function() {
 
     console.log("Updated user Favorites: " + userFavorites);
     localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
+
+    // Removed from favorites modal
+    $('#overlay2').modal('show');
+    setTimeout(function() {
+        $('#overlay2').modal('hide');
+    }, 850);
 
 })
  
