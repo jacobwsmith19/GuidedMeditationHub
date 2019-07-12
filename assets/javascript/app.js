@@ -30,6 +30,8 @@ const lectureFilter = 11;
 
 // Hides description box & disables next/prev/shuff buttons until track is clicked
 $('#description-div').hide();
+$('#add-button').hide();
+$('#remove-button').hide();
 
 // Ajax call to pull data from Google spreadsheet
 var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";
@@ -307,7 +309,6 @@ function allTracks(){
             id: content[0].data[0].rowData[i].values[12].effectiveValue.numberValue
         });
     }
-    renderPlaylist(playlist);
     shuffleTracks();
 }
 
@@ -352,18 +353,20 @@ function playAudio(){
         $('#next-button').attr("disabled", false);
         $('#previous-button').attr("disabled", false);
         $('#shuffle-button').attr("disabled", false);
-        //$('#add-button').attr("disabled", false);
-        //$('#remove-button').attr("disabled", false);
 
         var currentId = $('.playing').attr('id');
         userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
         const stringNum = currentId.toString();
         if (userFavorites.includes(stringNum)){
             $('#remove-button').attr("disabled", false);
+            $('#remove-button').show();
             $('#add-button').attr("disabled", true);
+            $('#add-button').hide();
         }else{
             $('#remove-button').attr("disabled", true);
+            $('#remove-button').hide();
             $('#add-button').attr("disabled", false);
+            $('#add-button').show();
         }
         // Loads audio file into audio player
         $("#currentlyPlaying").attr("src", $(this).attr("src"));
@@ -388,26 +391,33 @@ function playAudio(){
 $("#add-button").on("click", function() {
     var favoriteItem = $('.playing').attr('id');
     var userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
-    // userFavorites = []; //*** Unhide this line and hide line below to clear out local storage***
-    userFavorites.push(favoriteItem);
-
-    localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
-    
-    // Added to favorites modal
-    $('#overlay').modal('show');
-    setTimeout(function() {
-        $('#overlay').modal('hide');
-    }, 850);
-
-    renderPlaylist(playlist);
 
     const stringNum = favoriteItem.toString();
     if (userFavorites.includes(stringNum)){
         $('#remove-button').attr("disabled", false);
+        $('#remove-button').show();
         $('#add-button').attr("disabled", true);
+        $('#add-button').hide();
+        console.log("Track already liked!")
     }else{
         $('#remove-button').attr("disabled", true);
+        $('#remove-button').hide();
         $('#add-button').attr("disabled", false);
+        $('#add-button').hide();
+        
+        // userFavorites = []; //*** Unhide this line and hide line below to clear out local storage***
+        userFavorites.push(favoriteItem);
+
+        localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
+        
+        // Added to favorites modal
+        $('#overlay').modal('show');
+        setTimeout(function() {
+            $('#overlay').modal('hide');
+        }, 850);
+        $('#add-button').attr("disabled", true);
+
+        renderPlaylist(playlist);
     }
 })
 
@@ -459,7 +469,8 @@ $("#remove-button").on("click", function() {
         setTimeout(function() {
             $('#overlay2').modal('hide');
         }, 850);
-
+        $('#remove-button').attr("disabled", true);
+        $('#remove-button').hide();
         renderPlaylist(playlist);
     }else{
         console.log("Track not in favorites");
