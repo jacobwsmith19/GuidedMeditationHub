@@ -84,13 +84,13 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 
 .playing {
     background-color:  rgba(243, 94, 26, 0.747); 
-    border-radius: 15px;
-    font-weight: bold;
+    border-radius: .25rem;
+    color: rgb(189, 4, 4);
 }
 
 .current-playlist:hover {
     background-color: rgba(243, 94, 26, 0.747); 
-    border-radius: 15px;
+    border-radius: .25rem;
 }
 
 #description-div {

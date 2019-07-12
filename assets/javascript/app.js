@@ -400,6 +400,15 @@ $("#add-button").on("click", function() {
     }, 850);
 
     renderPlaylist(playlist);
+
+    const stringNum = favoriteItem.toString();
+    if (userFavorites.includes(stringNum)){
+        $('#remove-button').attr("disabled", false);
+        $('#add-button').attr("disabled", true);
+    }else{
+        $('#remove-button').attr("disabled", true);
+        $('#add-button').attr("disabled", false);
+    }
 })
 
 // "My Favorites" button: renders playlist of tracks stored locally
