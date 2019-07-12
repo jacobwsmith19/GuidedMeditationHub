@@ -63,6 +63,10 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     background-color: #ffc107;
 }
 
+#add-button:disabled, #remove-button:disabled {
+    background-color: rgba(128, 128, 128, 0.342);
+}
+
 .current-playlist {
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 

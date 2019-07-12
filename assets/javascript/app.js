@@ -46,13 +46,11 @@ $.ajax({
     $('#sound-button').attr("disabled", false);
     $('#lecture-button').attr("disabled", false);
     $('#favorites-button').attr("disabled", false);
-    $('#add-button').attr("disabled", false);
-    $('#remove-button').attr("disabled", false);
-    $('#add-button').attr("disabled", false);
+    $('#all-button').attr("disabled", false);
     allTracks();
 }); 
 
-console.log(filtersArr);
+console.log("Filters array: " + filtersArr);
 
 // Short button
 $("#short-button").on("click", function(){
@@ -317,7 +315,7 @@ function allTracks(){
 function renderPlaylist(playlist){
     $("#playlist").html("");
     userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
-    console.log(userFavorites);
+    console.log("User favorites: " +userFavorites);
     playlist.forEach((item, i) => {
         const formattedDuration = moment.utc(item.duration*1000).format('m:ss');
         const stringNum = item.id.toString();
@@ -354,9 +352,19 @@ function playAudio(){
         $('#next-button').attr("disabled", false);
         $('#previous-button').attr("disabled", false);
         $('#shuffle-button').attr("disabled", false);
-        $('#add-button').attr("disabled", false);
-        $('#remove-button').attr("disabled", false);
-        
+        //$('#add-button').attr("disabled", false);
+        //$('#remove-button').attr("disabled", false);
+
+        var currentId = $('.playing').attr('id');
+        userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
+        const stringNum = currentId.toString();
+        if (userFavorites.includes(stringNum)){
+            $('#remove-button').attr("disabled", false);
+            $('#add-button').attr("disabled", true);
+        }else{
+            $('#remove-button').attr("disabled", true);
+            $('#add-button').attr("disabled", false);
+        }
         // Loads audio file into audio player
         $("#currentlyPlaying").attr("src", $(this).attr("src"));
         $("#audioPlayer")[0].load();
@@ -376,13 +384,13 @@ function playAudio(){
 
 // Local storage
 
-// Adds the track ID of currently playing track to the local storage array
+// "Like Track" button: adds the track ID of currently playing track to the local storage array
 $("#add-button").on("click", function() {
     var favoriteItem = $('.playing').attr('id');
     var userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
-    //userFavorites = []; //*** Unhide this line and hide line below to clear out local storage***
+    // userFavorites = []; //*** Unhide this line and hide line below to clear out local storage***
     userFavorites.push(favoriteItem);
-    console.log("Updated local favorites: " + userFavorites);
+
     localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
     
     // Added to favorites modal
@@ -390,9 +398,11 @@ $("#add-button").on("click", function() {
     setTimeout(function() {
         $('#overlay').modal('hide');
     }, 850);
+
+    renderPlaylist(playlist);
 })
 
-// Renders playlist from track IDs stored locally
+// "My Favorites" button: renders playlist of tracks stored locally
  $("#favorites-button").on("click", function() {
     var currentFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
     console.log("Track IDs stored locally: " + currentFavorites);
@@ -416,27 +426,34 @@ $("#add-button").on("click", function() {
     renderPlaylist(playlist);
 })
 
-// Remove button
+// "Unlike Track" button: removes track ID of currently playing track from local storage array
 $("#remove-button").on("click", function() {
     var currentId = $('.playing').attr('id');
     userFavorites = JSON.parse(localStorage.getItem('localFavorites')) || [];
     console.log("User favorites: " + userFavorites);
     console.log("Current ID: " + currentId);
 
-    for (i = userFavorites.length - 1; i >= 0; i--){
-        if (userFavorites[i] === currentId){
-            userFavorites.splice(i, 1);
+    const stringNum = currentId.toString();
+    if (userFavorites.includes(stringNum)){
+
+        for (i = userFavorites.length - 1; i >= 0; i--){
+            if (userFavorites[i] === currentId){
+                userFavorites.splice(i, 1);
+            }
         }
+
+        console.log("Updated user Favorites: " + userFavorites);
+        localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
+
+        // Removed from favorites modal
+        $('#overlay2').modal('show');
+        setTimeout(function() {
+            $('#overlay2').modal('hide');
+        }, 850);
+
+        renderPlaylist(playlist);
+    }else{
+        console.log("Track not in favorites");
     }
-
-    console.log("Updated user Favorites: " + userFavorites);
-    localStorage.setItem("localFavorites", JSON.stringify(userFavorites));
-
-    // Removed from favorites modal
-    $('#overlay2').modal('show');
-    setTimeout(function() {
-        $('#overlay2').modal('hide');
-    }, 850);
-
 })
  
