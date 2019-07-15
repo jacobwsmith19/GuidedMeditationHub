@@ -9,7 +9,7 @@ body {
     padding: 0px;
     margin-top: 53px;
     position: sticky;
-    z-index: 6000;
+    z-index: 500;
     top: 54px;
     min-height: 80px;
     margin-bottom: 0px;
@@ -178,6 +178,10 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 }
 
 .dropdown-menu{
+    z-index: 5001;
+}
+
+#navbarNavDropdown{
     z-index: 5001;
 }
 
