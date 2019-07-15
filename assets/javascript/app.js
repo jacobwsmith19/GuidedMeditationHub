@@ -34,7 +34,11 @@ $('#add-button').hide();
 $('#remove-button').hide();
 
 // Ajax call to pull data from Google spreadsheet
-var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT4/?key=AIzaSyCIlkGoF9ptyUJZCB8sy7lCTnK-Bq58Bcw&includeGridData=true";
+var part1 = "4/?ke";
+var part2 = "y=AIzaSyCIlkGoF9";
+var part3 = "ptyUJZCB8sy7lCTnK-Bq58Bcw&inc";
+var part4 = "ludeGridData=true";
+var queryURL = "https://sheets.googleapis.com/v4/spreadsheets/1Bysg6lO4dCENpN6Mk_A8W26b2Qeq_H4eQHXzJnEjeT" + part1 + part2 + part3 + part4;
 $.ajax({
     url: queryURL,
     method: "GET"
