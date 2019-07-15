@@ -63,29 +63,29 @@
     </div>
 
 <div class="container">
-<div class="audio-container">
-    <div class="text-center" id="audio-player-div">
-        <audio id= "audioPlayer" controls preload="metadata" style="width:90%;">
-           <source id= "currentlyPlaying" src="" type="audio/mpeg">
-           Your browser does not support the audio element.
-       </audio>  
-   </div>
-   
-
-   <div class="text-center" id="audio-player-controls">
-        <button type="button" disabled= "true" id="next-button">Next <i class="fas fa-forward"></i></button>
-        <button type="button" disabled= "true" id="previous-button">Previous <i class="fas fa-backward"></i></button>
-        <button type="button" disabled= "true" id="shuffle-button">Shuffle <i class="fas fa-random"></i></button>
-   </div>
-   <div class="col-md-auto" id="description-div">
-        <strong>Playing: </strong><span id="current-meditation"></span>
-        </br>
-        <strong>Description: </strong><span id="description"></span>
-        </br>
-        <button type="button" id="add-button" disabled= "true">Like Track</button>
-        <button type="button" id="remove-button" disabled= "true">Unlike Track</button>
+    <div class="audio-container">
+        <div class="text-center" id="audio-player-div">
+            <audio id= "audioPlayer" controls preload="metadata">
+            <source id= "currentlyPlaying" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>  
     </div>
-</div>
+    
+
+    <div class="text-center" id="audio-player-controls">
+            <button type="button" disabled= "true" id="next-button">Next <i class="fas fa-forward"></i></button>
+            <button type="button" disabled= "true" id="previous-button">Previous <i class="fas fa-backward"></i></button>
+            <button type="button" disabled= "true" id="shuffle-button">Shuffle <i class="fas fa-random"></i></button>
+    </div>
+    <div class="col-md-auto" id="description-div">
+            <strong>Playing: </strong><span id="current-meditation"></span>
+            </br>
+            <strong>Description: </strong><span id="description"></span>
+            </br>
+            <button type="button" id="add-button" disabled= "true">Like Track</button>
+            <button type="button" id="remove-button" disabled= "true">Unlike Track</button>
+        </div>
+    </div>
     </br>
 
     <div class="row justify-content-center">
