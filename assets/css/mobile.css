@@ -10,6 +10,16 @@ body {
     margin-top: 53px;
 }
 
+.container-content{
+    flex-direction: column-reverse;
+}
+#playlist {
+    height: 100%;
+    overflow-y: overlay;
+    padding-left:0px;
+    padding-right:0px;
+}
+
 .btn {
     width: 175px;
     height: 70px;
@@ -25,7 +35,7 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 }
 
 #next-button, #previous-button, #shuffle-button {
-    height: 70px;
+    height: 80px;
     width: 25%;
     margin-top: 6px;
     margin-left: 5px;
@@ -42,19 +52,23 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     background-color: #ffc107;
 }
 
+#like-unlike{
+    padding-left:10%;
+}
+
 #next-button:disabled, #previous-button:disabled, #shuffle-button:disabled{
     background-color: rgba(128, 128, 128, 0.342);
 }
 
 #add-button, #remove-button {
-    width: 150px;
+    width: 200px;
     background-color: rgba(243, 94, 26, 0.747); 
     border-radius: 30px;
     font-family: 'Hind Madurai', sans-serif;
-    font-size: 20px;
+    font-size: 35px;
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
-    height: 50px;
+    height: 80px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -70,15 +84,19 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     border: 1px solid;
     border-color:  rgba(243, 94, 26, 0.747); 
     background-color: #ffc107;
-    margin: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     border-radius: .25rem;
     cursor: pointer;
-    height: 100px;
+    height: 140px;
     width: 98%;
     vertical-align: center;
     padding: 14px;
+    padding-top:40px;
     font-family: 'Hind Madurai', sans-serif;
-    font-size: 40px;
+    font-size: 35px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -100,9 +118,9 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     margin: 2px;
     border-radius: .25rem;
     height: 100%;
-    padding: 10px;
+    padding: 30px;
     font-family: 'Hind Madurai', sans-serif;
-    font-size: 40px;
+    font-size: 35px;
     margin-top: 20px; 
     margin-left:0%;
     width:100%;
