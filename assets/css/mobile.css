@@ -93,7 +93,7 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     width: 98%;
     vertical-align: center;
     padding: 14px;
-    padding-top: 30px;
+    padding-top: 25px;
     font-family: 'Hind Madurai', sans-serif;
     font-size: 20px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -182,7 +182,7 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 .audio-container {
     position: sticky;
     z-index: 500;
-    top: 54px;
+    top: 200px;
     min-height: 120px;
     background-color: rgba(253, 255, 157);
     padding-bottom: 5px;
