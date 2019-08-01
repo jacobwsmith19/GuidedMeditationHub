@@ -154,10 +154,11 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     padding-bottom: 2px;
     padding-left: 20px;
     padding-right: 0px;
+  
 }
 
 .navbar-nav{
-    float: center;
+    /* float: center; */
 }
 
 .modal-dialog {
