@@ -154,6 +154,7 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 
 .navbar-nav{
     float: center;
+    flex-direction: row;
 }
 
 .modal-dialog {
@@ -200,4 +201,20 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     z-index: 5001;
 }
 
+.collapse:not(.show){
+    display: inline-block;
+}
 
+.navbar-collapse{
+    flex-basis: auto;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
+    float: none;
+}
+
+.navbar-nav .nav-link {
+    padding-right: 10px;
+    padding-left: 0;
+}
