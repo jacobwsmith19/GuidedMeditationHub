@@ -157,10 +157,6 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
   
 }
 
-.navbar-nav{
-    /* float: center; */
-}
-
 .modal-dialog {
     justify-content: center;
     margin-top: 250px;
@@ -215,3 +211,51 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
     padding-top:10px;
 }
 
+#formSubmitButton {
+    border: 1px solid;
+    border-color:  rgba(243, 94, 26, 0.747); 
+    background-color: #ffc107;
+    margin-left: 2px;
+    margin-right:2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: .25rem;
+    cursor: pointer;
+    height: 60px;
+    width: 100px;
+    vertical-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-right:10px;
+    padding-left:10px;
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 20px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    z-index: 20;
+}
+
+#formSubmitButton:hover {
+    background-color: rgba(243, 94, 26, 0.747); 
+    border-radius: .25rem;
+}
+
+#form{
+    font-family: 'Hind Madurai', sans-serif;
+}
+
+.formBox{
+    border: 1px solid;
+    border-color:  rgba(243, 94, 26, 0.747); 
+    background-color: #ffc107;
+    border-radius: .25rem;
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 20px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    vertical-align: text-top;
+    width: 500px;
+}
+
+.formBox:hover {
+    background-color: rgba(243, 94, 26, 0.747); 
+    border-radius: .25rem;
+}
