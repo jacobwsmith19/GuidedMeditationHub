@@ -1,33 +1,35 @@
 body {
     background-color: rgba(253, 255, 157);
-    /* overflow:hidden;  */
     width:100%;
 }
 
 html {
-    /* overflow:hidden;  */
     width:100%; 
 }
 
 .jumbotron {
-    background-color: rgba(243, 94, 26, 0.747); 
+    background-color: rgba(243, 94, 26, 0.747);
     color: rgb(213, 250, 3);
     font-family: 'Hind Madurai', sans-serif;
     font-size: 30px;
     padding: 0px;
-    margin-top: 53px;
+    position: fixed;
+    width: 100%;
+    top: 54px;
+    height: 6vh;
 }
 
 .container-content{
     flex-direction: column-reverse;
 }
 #playlist {
-    /* height: 100%; */
     overflow-y: scroll;
     padding-left:0px;
     padding-right:0px;
     display: inline-block;
-    position: sticky;
+    top: 46vh;
+    height: 60vh;
+    overflow-y: scroll;
 }
 
 .btn {
@@ -122,21 +124,20 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 
 #description-div {
     border: 1px solid;
-    border-color:  rgba(243, 94, 26, 0.747); 
-    background-color:rgba(243, 94, 26, 0.747); 
-    height: 100%;
+    border-color: rgba(243, 94, 26, 0.747);
+    background-color: rgba(243, 94, 26, 0.747);
     padding: 5px;
     font-family: 'Hind Madurai', sans-serif;
-    font-size: 15px; 
-    margin-top:10px;
-    margin-bottom: 10px;
-    margin-left:0%;
-    width:100%;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 0%;
+    width: 100%;
+    height: 15vh;
+    overflow-y: scroll;
 }
 
 #audioPlayer {
     width: 90%;
-    margin-top:10px;
     margin-bottom: 10px;
 }
 
@@ -190,7 +191,6 @@ box-shadow: 0 0 0 0.2rem rgba(222,170,12,.5);
 .audio-container {
     position: fixed;
     z-index: 500;
-    top: 54px;
     min-height: 120px;
     background-color: rgba(253, 255, 157);
     padding-bottom: 5px;
