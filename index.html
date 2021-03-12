@@ -28,6 +28,14 @@
         gtag('js', new Date());
         gtag('config', 'UA-145109080-1');
     </script>
+  
+  <!-- Segment -->
+  <script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="YwUx31DZCTn0xN3V0pF4nl9ekHmBZqr1";analytics.SNIPPET_VERSION="4.13.2";
+  analytics.load("YwUx31DZCTn0xN3V0pF4nl9ekHmBZqr1");
+  analytics.page();
+  }}();
+</script>
 </head>
 
 <body>
@@ -50,7 +58,7 @@
                     <button class="dropdown-item" type="button" id="eyes-open-button">Eyes Open</button>
                     <button class="dropdown-item" type="button" id="sound-button">Sounds</button>
                     <button class="dropdown-item" type="button" id="lecture-button">Lectures</button>
-                    <button class="dropdown-item" type="button" id="favorites-button">My Favorites</button>
+                    <button class="dropdown-item" type="button" id="favorites-button">Favorites</button>
                 </div>
                 </li>
                 <li class="nav-item">
