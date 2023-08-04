@@ -1,5 +1,7 @@
 # GuidedMeditationHub
 
+Site: https://jacobwsmith19.github.io/GuidedMeditationHub/
+
 This is an easy-to-use app for playing guided meditation audio files. A playlist is generated based on user criteria. The goal of this project was to keep the app as simple and practical as possible: the user should be listening to their desired audio file within three clicks.
 
 # How it works:
